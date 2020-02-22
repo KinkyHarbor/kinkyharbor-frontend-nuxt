@@ -5,9 +5,9 @@
         <v-icon size="100px">mdi-anchor</v-icon>
       </div>
       <v-card>
-        <v-card-title class="headline">Welcome to Harbor</v-card-title>
+        <v-card-title class="headline">Transparency</v-card-title>
         <v-card-text>
-          <p>Your socially safe heaven &hellip;</p>
+          <p>&hellip;</p>
         </v-card-text>
       </v-card>
     </v-flex>
@@ -18,12 +18,7 @@
 export default {
   auth: false,
   head() {
-    return { title: 'Home' }
-  },
-  middleware({ store, redirect }) {
-    if (store.state.auth.loggedIn) {
-      return redirect('/feed')
-    }
+    return { title: 'Transparency' }
   },
 }
 </script>

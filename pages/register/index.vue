@@ -5,9 +5,9 @@
         <v-row align="center" justify="center">
           <v-stepper :value="step">
             <v-stepper-header>
-              <v-stepper-step step="1" :complete="step > 1">
-                Create account
-              </v-stepper-step>
+              <v-stepper-step step="1" :complete="step > 1"
+                >Create account</v-stepper-step
+              >
               <v-divider></v-divider>
               <v-stepper-step step="2">Verify mail address</v-stepper-step>
               <v-divider></v-divider>
@@ -15,9 +15,7 @@
             </v-stepper-header>
 
             <v-stepper-content step="1">
-              <h2 class="title my-5">
-                Do you dare to make an account?
-              </h2>
+              <h2 class="title my-5">Do you dare to make an account?</h2>
 
               <v-form method="post" @submit.prevent="register">
                 <v-text-field
@@ -31,6 +29,7 @@
                 <v-text-field
                   v-model="email"
                   :rules="emailRules"
+                  :error-messages="emailErrors"
                   type="email"
                   label="Email"
                   required
@@ -51,15 +50,16 @@
                 <v-btn
                   :disabled="!valid"
                   color="primary"
-                  class="mr-4"
-                  @click="register"
+                  class="mr-4 my-5"
+                  type="submit"
+                  block
+                  >Register</v-btn
                 >
-                  Register
-                </v-btn>
               </v-form>
 
               <div style="margin-top: 20px">
-                Already got an account? <nuxt-link to="/login">Login</nuxt-link>
+                Already got an account?
+                <nuxt-link to="/login">Login</nuxt-link>
               </div>
             </v-stepper-content>
 
@@ -91,11 +91,12 @@ export default {
       email: '',
       emailRules: [
         (v) => !!v || 'E-mail is required',
-        (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid'
+        (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
       ],
+      emailErrors: [],
       password: '',
       passwordErrors: [],
-      showPass: false
+      showPass: false,
     }
   },
 
@@ -106,21 +107,22 @@ export default {
           username: this.username,
           email: this.email,
           password: this.password,
-          password_confirm: this.password
+          password_confirm: this.password,
         })
 
         this.step = 2
       } catch (e) {
         const { data } = e.response
         this.usernameErrors = data.username ? data.username : []
+        this.emailErrors = data.email ? data.email : []
         this.passwordErrors = data.password ? data.password : []
       }
-    }
+    },
   },
 
   head() {
     return { title: 'Register' }
-  }
+  },
 }
 </script>
 

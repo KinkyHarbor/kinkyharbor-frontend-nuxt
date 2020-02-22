@@ -19,9 +19,19 @@
       </v-list>
 
       <template v-slot:append>
-        <div class="pa-2">
-          <v-btn block @click="logout">Logout</v-btn>
-        </div>
+        <v-list>
+          <v-list-item to="/about" router exact>
+            <v-list-item-content>
+              <v-list-item-title>About</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item to="/transparency" router exact>
+            <v-list-item-content>
+              <v-list-item-title>Transparency</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
       </template>
     </v-navigation-drawer>
 
@@ -30,16 +40,32 @@
       <v-toolbar-title>
         <nuxt-link :to="loggedIn ? '/feed' : '/'">
           <v-btn text large>
-            <v-icon left large>mdi-anchor</v-icon> {{ title }}
+            <v-icon left large>mdi-anchor</v-icon>
+            {{ title }}
           </v-btn>
         </nuxt-link>
       </v-toolbar-title>
+
+      <nuxt-link v-if="!loggedIn" to="/about">
+        <v-btn text large>About</v-btn>
+      </nuxt-link>
+
+      <nuxt-link v-if="!loggedIn" to="/transparency">
+        <v-btn text large>Transparency</v-btn>
+      </nuxt-link>
+
       <v-spacer />
+
       <nuxt-link v-if="!loggedIn" to="/login">
         <v-btn text>Login</v-btn>
       </nuxt-link>
+
       <nuxt-link v-if="!loggedIn" to="/register">
         <v-btn text>Register</v-btn>
+      </nuxt-link>
+
+      <nuxt-link v-if="loggedIn" to="/logout">
+        <v-btn text>Logout</v-btn>
       </nuxt-link>
     </v-app-bar>
     <v-content>
@@ -61,26 +87,20 @@ export default {
         {
           icon: 'mdi-format-list-bulleted-square',
           title: 'Feed',
-          to: '/feed'
+          to: '/feed',
         },
         {
           icon: 'mdi-account-group',
           title: 'Groups',
-          to: '/groups'
-        }
+          to: '/groups',
+        },
       ],
-      title: 'Harbor'
+      title: 'Harbor',
     }
   },
 
   computed: {
-    ...mapState('auth', ['loggedIn', 'user'])
+    ...mapState('auth', ['loggedIn', 'user']),
   },
-
-  methods: {
-    async logout() {
-      await this.$auth.logout()
-    }
-  }
 }
 </script>

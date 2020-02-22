@@ -10,6 +10,6 @@
 export default {
   head() {
     return { title: 'Groups' }
-  }
+  },
 }
 </script>

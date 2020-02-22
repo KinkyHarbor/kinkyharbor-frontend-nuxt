@@ -10,6 +10,6 @@
 export default {
   head() {
     return { title: 'Feed' }
-  }
+  },
 }
 </script>
