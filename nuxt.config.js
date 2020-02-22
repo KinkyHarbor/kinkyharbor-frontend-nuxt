@@ -14,13 +14,13 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
-      }
+        content: process.env.npm_package_description || '',
+      },
     ],
-    link: [{ rel: 'icon', type: 'image/png', href: '/favicon.png' }]
+    link: [{ rel: 'icon', type: 'image/png', href: '/favicon.png' }],
   },
   router: {
-    middleware: ['auth']
+    middleware: ['auth'],
   },
   /*
    ** Customize the progress-bar color
@@ -40,7 +40,7 @@ export default {
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
-    '@nuxtjs/vuetify'
+    '@nuxtjs/vuetify',
   ],
   /*
    ** Nuxt.js modules
@@ -51,14 +51,14 @@ export default {
     '@nuxtjs/auth',
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: 'http://127.0.0.1:8000/api'
+    baseURL: 'http://127.0.0.1:8000/api',
   },
   /*
    ** Auth module configuration
@@ -69,14 +69,18 @@ export default {
         endpoints: {
           login: { url: '/accounts/login/', method: 'post' },
           logout: { url: '/accounts/logout/', method: 'post' },
-          user: { url: '/accounts/profile/', method: 'get', propertyName: 'id' }
+          user: {
+            url: '/accounts/profile/',
+            method: 'get',
+            propertyName: 'id',
+          },
         },
-        tokenType: 'token'
-      }
+        tokenType: 'token',
+      },
     },
     redirect: {
-      home: '/feed'
-    }
+      home: '/feed',
+    },
   },
   /*
    ** vuetify module configuration
@@ -95,9 +99,9 @@ export default {
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
           success: colors.lightGreen.base,
-        }
-      }
-    }
+        },
+      },
+    },
   },
   /*
    ** Build configuration
@@ -106,6 +110,6 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) { }
-  }
+    extend(config, ctx) {},
+  },
 }
