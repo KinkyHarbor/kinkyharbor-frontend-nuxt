@@ -8,10 +8,8 @@ export default {
 
   async asyncData(context) {
     try {
-      await context.$axios.post('/accounts/verify-registration/', {
-        user_id: context.route.query.user_id,
-        timestamp: context.route.query.timestamp,
-        signature: context.route.query.signature,
+      await context.$axios.post('/auth/register/verify/', {
+        secret: context.route.query.token,
       })
 
       context.redirect({ path: '/login', query: { register: 'success' } })

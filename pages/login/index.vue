@@ -83,6 +83,8 @@
 </template>
 
 <script>
+const qs = require('querystring')
+
 export default {
   data() {
     return {
@@ -100,10 +102,14 @@ export default {
     async login() {
       try {
         await this.$auth.loginWith('local', {
-          data: {
-            login: this.username,
-            password: this.password,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
           },
+          data: qs.stringify({
+            grant_type: 'password',
+            username: this.username,
+            password: this.password,
+          }),
         })
 
         this.$router.push('/')

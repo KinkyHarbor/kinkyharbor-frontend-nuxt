@@ -65,6 +65,10 @@
       </nuxt-link>
 
       <nuxt-link v-if="loggedIn" to="/logout">
+        <v-btn text>{{ user.display_name }}</v-btn>
+      </nuxt-link>
+
+      <nuxt-link v-if="loggedIn" to="/logout">
         <v-btn text>Logout</v-btn>
       </nuxt-link>
     </v-app-bar>
