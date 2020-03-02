@@ -81,11 +81,17 @@ export default {
 
         this.$router.push({ path: '/login', query: { reset: 'success' } })
       } catch (e) {
-        const { data } = e.response
-        if (data.detail) {
-          this.detailError = data.detail
+        if (typeof e.response !== 'undefined') {
+          // Server reported error
+          const { data } = e.response
+          if (data.detail) {
+            this.detailError = data.detail
+          } else {
+            this.errors = data
+          }
         } else {
-          this.errors = data
+          // General error
+          this.detailError = e.message
         }
       }
     },

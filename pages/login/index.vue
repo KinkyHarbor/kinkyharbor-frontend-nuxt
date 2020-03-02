@@ -1,32 +1,10 @@
 <template>
   <v-container fluid>
-    <v-row v-if="register">
+    <v-row v-for="alert in alerts" :key="alert.message">
       <v-col cols="12">
         <v-row align="center" justify="center">
-          <v-alert type="success">
-            Email validated successfully. <br />
-            Please login to finalize registration.
-          </v-alert>
-        </v-row>
-      </v-col>
-    </v-row>
-
-    <v-row v-if="reset">
-      <v-col cols="12">
-        <v-row align="center" justify="center">
-          <v-alert type="success">
-            Password resetted successfully.
-          </v-alert>
-        </v-row>
-      </v-col>
-    </v-row>
-
-    <v-row v-if="error">
-      <v-col cols="12">
-        <v-row align="center" justify="center">
-          <v-alert type="error">
-            {{ error }}
-            <br />Is your mail address already validated?
+          <v-alert :type="alert.type">
+            {{ alert.message }}
           </v-alert>
         </v-row>
       </v-col>
@@ -92,10 +70,39 @@ export default {
       username: '',
       password: '',
       showPass: false,
-      error: '',
+      loginError: '',
       register: this.$route.query.register,
       reset: this.$route.query.reset,
     }
+  },
+
+  computed: {
+    alerts() {
+      const alerts = []
+
+      if (this.register) {
+        alerts.push({
+          type: 'success',
+          message: 'Please login to finalize registration.',
+        })
+      }
+
+      if (this.reset) {
+        alerts.push({
+          type: 'success',
+          message: 'Password resetted successfully.',
+        })
+      }
+
+      if (this.loginError) {
+        alerts.push({
+          type: 'error',
+          message: this.loginError,
+        })
+      }
+
+      return alerts
+    },
   },
 
   methods: {
@@ -112,9 +119,17 @@ export default {
           }),
         })
 
+        // Redirect to homepage
         this.$router.push('/')
       } catch (e) {
-        this.error = e.response.data.detail
+        // Login failed
+        if (typeof e.response !== 'undefined') {
+          // Server reported error
+          this.loginError = e.response.data.detail
+        } else {
+          // General error
+          this.loginError = e.message
+        }
         this.register = ''
       }
     },
@@ -125,5 +140,3 @@ export default {
   },
 }
 </script>
-
-<style></style>
