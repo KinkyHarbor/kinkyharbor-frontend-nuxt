@@ -72,10 +72,9 @@ export default {
   methods: {
     async resetPassword() {
       try {
-        await this.$axios.post('/accounts/reset-password/', {
-          user_id: this.$route.query.user_id,
-          timestamp: this.$route.query.timestamp,
-          signature: this.$route.query.signature,
+        await this.$axios.post('/auth/login/password-reset/', {
+          user_id: this.$route.query.user,
+          token: this.$route.query.token,
           password: this.password,
         })
 
