@@ -6,6 +6,7 @@
       app
       clipped
       mobile-break-point="960"
+      :permanent="$vuetify.breakpoint.mdAndUp"
       :expand-on-hover="$vuetify.breakpoint.mdAndUp"
     >
       <v-list>
@@ -51,7 +52,7 @@
 
     <v-app-bar app clipped-left>
       <v-app-bar-nav-icon
-        :class="navIconClass"
+        class="hidden-md-and-up"
         @click.stop="drawer = !drawer"
       />
 
@@ -130,7 +131,7 @@ import { mapState } from 'vuex'
 export default {
   data() {
     return {
-      drawer: this.loggedIn,
+      drawer: Boolean(this.loggedIn),
       items: [
         {
           icon: 'mdi-home',
@@ -176,10 +177,6 @@ export default {
       return this.items.filter((i) => {
         return (i.private && this.loggedIn) || (i.public && !this.loggedIn)
       })
-    },
-
-    navIconClass() {
-      return this.loggedIn ? '' : 'hidden-md-and-up'
     },
 
     ...mapState('auth', ['loggedIn', 'user']),

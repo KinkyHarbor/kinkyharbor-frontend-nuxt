@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-row v-for="alert in alerts" :key="alert.message">
-      <v-col cols="12" sm="8" md="6" lg="4">
+      <v-col cols="12">
         <v-row align="center" justify="center">
           <v-alert :type="alert.type">
             {{ alert.message }}

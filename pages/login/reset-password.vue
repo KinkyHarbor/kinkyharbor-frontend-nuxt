@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-row v-if="errors">
-      <v-col cols="12" sm="8" md="6" lg="4">
+      <v-col cols="12">
         <v-row
           v-for="(fieldErrors, field) in errors"
           :key="field"
@@ -19,7 +19,7 @@
     </v-row>
 
     <v-row v-if="detailError">
-      <v-col cols="12" sm="8" md="6" lg="4">
+      <v-col cols="12">
         <v-row align="center" justify="center">
           <v-alert type="error">{{ detailError }}</v-alert>
         </v-row>
