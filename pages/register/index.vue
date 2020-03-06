@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col cols="12">
+      <v-col cols="12" sm="8" md="6" lg="4">
         <v-row align="center" justify="center">
           <v-stepper :value="step">
             <v-stepper-header>

@@ -1,17 +1,25 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer v-if="loggedIn" v-model="drawer" app clipped>
+    <v-navigation-drawer
+      v-model="drawer"
+      :disable-resize-watcher="!loggedIn"
+      app
+      clipped
+      mobile-break-point="960"
+      :expand-on-hover="$vuetify.breakpoint.mdAndUp"
+    >
       <v-list>
         <v-list-item
-          v-for="(item, i) in items"
+          v-for="(item, i) in navItems"
           :key="i"
           :to="item.to"
+          :class="item.classes"
           router
           exact
         >
-          <v-list-item-action>
+          <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
+          </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title v-text="item.title" />
           </v-list-item-content>
@@ -19,14 +27,20 @@
       </v-list>
 
       <template v-slot:append>
-        <v-list>
+        <v-list v-if="loggedIn">
           <v-list-item to="/about" router exact>
+            <v-list-item-icon>
+              <v-icon>mdi-information-outline</v-icon>
+            </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>About</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
 
           <v-list-item to="/transparency" router exact>
+            <v-list-item-icon>
+              <v-icon>mdi-magnify-scan</v-icon>
+            </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>Transparency</v-list-item-title>
             </v-list-item-content>
@@ -36,41 +50,71 @@
     </v-navigation-drawer>
 
     <v-app-bar app clipped-left>
-      <v-app-bar-nav-icon v-if="loggedIn" @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon
+        :class="navIconClass"
+        @click.stop="drawer = !drawer"
+      />
+
+      <nuxt-link :to="homeLink" class="hidden-sm-and-up">
+        <v-btn icon>
+          <v-icon large>mdi-anchor</v-icon>
+        </v-btn>
+      </nuxt-link>
+
       <v-toolbar-title>
-        <nuxt-link :to="loggedIn ? '/feed' : '/'">
+        <nuxt-link :to="homeLink" class="hidden-xs-only">
           <v-btn text large>
-            <v-icon left large>mdi-anchor</v-icon>
+            <v-icon large left>mdi-anchor</v-icon>
             {{ title }}
           </v-btn>
         </nuxt-link>
       </v-toolbar-title>
 
-      <nuxt-link v-if="!loggedIn" to="/about">
+      <nuxt-link v-if="!loggedIn" to="/about" class="hidden-sm-and-down">
         <v-btn text large>About</v-btn>
       </nuxt-link>
 
-      <nuxt-link v-if="!loggedIn" to="/transparency">
+      <nuxt-link v-if="!loggedIn" to="/transparency" class="hidden-sm-and-down">
         <v-btn text large>Transparency</v-btn>
       </nuxt-link>
 
       <v-spacer />
 
       <nuxt-link v-if="!loggedIn" to="/login">
-        <v-btn text>Login</v-btn>
+        <v-btn text large>Login</v-btn>
       </nuxt-link>
 
       <nuxt-link v-if="!loggedIn" to="/register">
-        <v-btn text>Register</v-btn>
+        <v-btn text large>Register</v-btn>
       </nuxt-link>
 
-      <nuxt-link v-if="loggedIn" to="/logout">
-        <v-btn text>{{ user.display_name }}</v-btn>
+      <nuxt-link v-if="loggedIn" to="/profile">
+        <v-icon large>mdi-account-circle</v-icon>
       </nuxt-link>
 
-      <nuxt-link v-if="loggedIn" to="/logout">
-        <v-btn text>Logout</v-btn>
-      </nuxt-link>
+      <v-menu v-if="loggedIn" :transition="false">
+        <template v-slot:activator="{ on }">
+          <v-btn icon v-on="on">
+            <v-icon large>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item to="/settings" nuxt>
+            <v-list-item-icon>
+              <v-icon>mdi-tune</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Settings</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item to="/logout" nuxt>
+            <v-list-item-icon>
+              <v-icon>mdi-logout</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Logout</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-app-bar>
     <v-content>
       <v-container>
@@ -86,17 +130,37 @@ import { mapState } from 'vuex'
 export default {
   data() {
     return {
-      drawer: true,
+      drawer: this.loggedIn,
       items: [
+        {
+          icon: 'mdi-home',
+          title: 'Home',
+          to: '/',
+          public: true,
+        },
+        {
+          icon: 'mdi-information-outline',
+          title: 'About',
+          to: '/about',
+          public: true,
+        },
+        {
+          icon: 'mdi-magnify-scan',
+          title: 'Transparency',
+          to: '/transparency',
+          public: true,
+        },
         {
           icon: 'mdi-format-list-bulleted-square',
           title: 'Feed',
           to: '/feed',
+          private: true,
         },
         {
           icon: 'mdi-account-group',
           title: 'Groups',
           to: '/groups',
+          private: true,
         },
       ],
       title: 'Harbor',
@@ -104,6 +168,20 @@ export default {
   },
 
   computed: {
+    homeLink() {
+      return this.loggedIn ? '/feed' : '/'
+    },
+
+    navItems() {
+      return this.items.filter((i) => {
+        return (i.private && this.loggedIn) || (i.public && !this.loggedIn)
+      })
+    },
+
+    navIconClass() {
+      return this.loggedIn ? '' : 'hidden-md-and-up'
+    },
+
     ...mapState('auth', ['loggedIn', 'user']),
   },
 }
