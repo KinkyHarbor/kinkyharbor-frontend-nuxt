@@ -90,7 +90,7 @@ export default {
       if (this.reset) {
         alerts.push({
           type: 'success',
-          message: 'Password resetted successfully.',
+          message: 'Password changed successfully.',
         })
       }
 
