@@ -52,17 +52,31 @@
 
     <v-app-bar app clipped-left>
       <v-app-bar-nav-icon
+        v-if="!searchMode"
         class="hidden-md-and-up"
         @click.stop="drawer = !drawer"
       />
 
-      <nuxt-link :to="homeLink" class="hidden-sm-and-up">
+      <v-text-field
+        v-if="searchMode"
+        v-model="searchString"
+        hide-details
+        prepend-icon="mdi-close"
+        append-outer-icon="mdi-magnify"
+        single-line
+        autofocus
+        @click:prepend.stop="searchMode = false"
+        @click:append-outer="search"
+        @keydown.esc="searchMode = false"
+      ></v-text-field>
+
+      <nuxt-link v-if="!searchMode" :to="homeLink" class="hidden-sm-and-up">
         <v-btn icon>
           <v-icon large>mdi-anchor</v-icon>
         </v-btn>
       </nuxt-link>
 
-      <v-toolbar-title>
+      <v-toolbar-title v-if="!searchMode">
         <nuxt-link :to="homeLink" class="hidden-xs-only">
           <v-btn text large>
             <v-icon large left>mdi-anchor</v-icon>
@@ -79,7 +93,7 @@
         <v-btn text large>Transparency</v-btn>
       </nuxt-link>
 
-      <v-spacer />
+      <v-spacer v-if="!searchMode" />
 
       <nuxt-link v-if="!loggedIn" to="/login">
         <v-btn text large>Login</v-btn>
@@ -89,14 +103,24 @@
         <v-btn text large>Register</v-btn>
       </nuxt-link>
 
-      <nuxt-link v-if="loggedIn" to="/profile">
-        <v-icon large>mdi-account-circle</v-icon>
-      </nuxt-link>
+      <v-btn v-if="loggedIn && !searchMode" icon nuxt to="/profile">
+        <v-icon :large="$vuetify.breakpoint.xsOnly">mdi-account-circle</v-icon>
+      </v-btn>
 
-      <v-menu v-if="loggedIn" :transition="false">
+      <v-btn
+        v-if="loggedIn && !searchMode"
+        icon
+        @click="searchMode = !searchMode"
+      >
+        <v-icon :large="$vuetify.breakpoint.xsOnly">mdi-magnify</v-icon>
+      </v-btn>
+
+      <v-menu v-if="loggedIn && !searchMode" :transition="false">
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
-            <v-icon large>mdi-dots-vertical</v-icon>
+            <v-icon :large="$vuetify.breakpoint.xsOnly"
+              >mdi-dots-vertical</v-icon
+            >
           </v-btn>
         </template>
 
@@ -136,6 +160,8 @@ export default {
   data() {
     return {
       demoMode: process.env.demoMode,
+      searchMode: false,
+      searchString: '',
       drawer: Boolean(this.loggedIn),
       items: [
         {
@@ -194,6 +220,10 @@ export default {
         this.drawer = false
       }
     },
+  },
+
+  methods: {
+    search() {},
   },
 }
 </script>
