@@ -181,12 +181,18 @@ export default {
           accent: colors.grey.darken3,
           secondary: colors.amber.darken3,
           info: colors.purple.darken4,
-          warning: colors.amber.base,
+          warning: colors.amber.darken4,
           error: colors.deepOrange.accent4,
           success: colors.lightGreen.base,
         },
       },
     },
+  },
+  /*
+   ** ENV
+   */
+  env: {
+    demoMode: Boolean(process.env.DEMO),
   },
   /*
    ** Build configuration

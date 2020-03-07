@@ -119,6 +119,10 @@
     </v-app-bar>
     <v-content>
       <v-container>
+        <v-alert v-if="demoMode" type="warning" dismissible>
+          This is a demo instance. Don't use any private information. Database
+          might be wiped as we see fit.
+        </v-alert>
         <nuxt />
       </v-container>
     </v-content>
@@ -131,6 +135,7 @@ import { mapState } from 'vuex'
 export default {
   data() {
     return {
+      demoMode: process.env.demoMode,
       drawer: Boolean(this.loggedIn),
       items: [
         {
