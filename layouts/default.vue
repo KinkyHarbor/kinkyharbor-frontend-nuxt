@@ -6,7 +6,7 @@
       app
       clipped
       mobile-break-point="960"
-      :permanent="$vuetify.breakpoint.mdAndUp"
+      :permanent="loggedIn && $vuetify.breakpoint.mdAndUp"
       :expand-on-hover="$vuetify.breakpoint.mdAndUp"
     >
       <v-list>

@@ -30,6 +30,7 @@
                   :type="showPass ? 'text' : 'password'"
                   name="password"
                   label="Password"
+                  required
                   @click:append="showPass = !showPass"
                 ></v-text-field>
 
@@ -123,12 +124,12 @@ export default {
         this.$router.push('/')
       } catch (e) {
         // Login failed
-        if (typeof e.response !== 'undefined') {
-          // Server reported error
-          this.loginError = e.response.data.detail
-        } else {
+        if (typeof e.response === 'undefined') {
           // General error
           this.loginError = e.message
+        } else {
+          // Server reported error
+          this.loginError = e.response.data.detail
         }
         this.register = ''
       }
