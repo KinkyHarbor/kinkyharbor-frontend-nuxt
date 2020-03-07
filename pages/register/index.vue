@@ -84,11 +84,13 @@
                 <template v-slot:label>
                   <div>
                     I agree with the
-                    <nuxt-link to="/privacy">privacy policy</nuxt-link>
+                    <a href="/privacy" target="_blank" @click.stop>
+                      privacy policy
+                    </a>
                     and
-                    <nuxt-link to="/terms-and-conditions"
-                      >terms and conditions</nuxt-link
-                    >
+                    <a href="/terms-and-conditions" target="_blank" @click.stop>
+                      terms and conditions
+                    </a>
                   </div>
                 </template>
               </v-checkbox>
@@ -117,10 +119,13 @@
 
     <v-row v-if="step === 1" align="center" justify="center">
       <v-col cols="12" sm="8" md="6">
-        <v-alert color="grey darken-4">
-          <strong>Password tip:</strong> Glue 4 or more words to each other.
-          Simple to remember and hard to hack. For example,
-          "IReallyLikeKinkyHarbor".
+        <v-alert color="grey darken-4" class="text--secondary">
+          <p><strong>Password tip</strong></p>
+          <p>
+            Glue four or more words to each other. Simple to remember and hard
+            to hack. For example, "IReallyLikeKinkyHarbor".
+          </p>
+          <p>PS: Don&apos;t use this example :D</p>
         </v-alert>
       </v-col>
     </v-row>
