@@ -121,7 +121,7 @@ export default {
         })
 
         // Redirect to homepage
-        this.$router.push('/')
+        this.$router.replace('/')
       } catch (e) {
         // Login failed
         if (typeof e.response === 'undefined') {

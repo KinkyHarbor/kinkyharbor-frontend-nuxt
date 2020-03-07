@@ -1,28 +1,10 @@
 <template>
   <v-container fluid>
-    <v-row v-if="errors">
-      <v-col cols="12">
-        <v-row
-          v-for="(fieldErrors, field) in errors"
-          :key="field"
-          align="center"
-          justify="center"
-        >
-          <v-alert
-            v-for="error in fieldErrors"
-            :key="field + error"
-            type="error"
-            >{{ field }}: {{ error }}</v-alert
-          >
-        </v-row>
-      </v-col>
-    </v-row>
-
-    <v-row v-if="detailError">
-      <v-col cols="12">
-        <v-row align="center" justify="center">
-          <v-alert type="error">{{ detailError }}</v-alert>
-        </v-row>
+    <v-row v-if="generalError" align="center" justify="center">
+      <v-col cols="12" sm="8" md="6">
+        <v-alert type="error">
+          {{ generalError }}
+        </v-alert>
       </v-col>
     </v-row>
 
@@ -33,19 +15,33 @@
             <v-card-text class="text-center">
               <h2 class="my-5">Reset your password</h2>
 
-              <v-form @submit.prevent="resetPassword">
+              <v-form
+                ref="form"
+                v-model="valid"
+                @submit.prevent="resetPassword"
+              >
                 <v-text-field
                   v-model="password"
                   :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
                   :type="showPass ? 'text' : 'password'"
+                  :rules="passwordRules"
                   name="password"
                   label="Password"
-                  hint="At least 8 characters"
+                  :hint="passwordHint"
+                  persistent-hint
                   counter
+                  :success-messages="passwordSuccess"
                   @click:append="showPass = !showPass"
                 ></v-text-field>
 
-                <v-btn type="submit">Reset password</v-btn>
+                <v-btn
+                  :disabled="!valid"
+                  color="primary"
+                  class="mr-4 my-5"
+                  type="submit"
+                  block
+                  >Reset password
+                </v-btn>
               </v-form>
             </v-card-text>
           </v-card>
@@ -61,11 +57,14 @@ export default {
 
   data() {
     return {
-      valid: true,
+      valid: false,
       password: '',
+      passwordHint:
+        'Min 8 char (lowercase, uppercase and digit) or 16 characters',
+      passwordSuccess: '',
+      passwordRules: [this.strongPasswordRule],
       showPass: false,
-      errors: {},
-      detailError: '',
+      generalError: '',
     }
   },
 
@@ -78,21 +77,51 @@ export default {
           password: this.password,
         })
 
-        this.$router.push({ path: '/login', query: { reset: 'success' } })
+        this.$router.replace({ path: '/login', query: { reset: 'success' } })
       } catch (e) {
-        if (typeof e.response !== 'undefined') {
-          // Server reported error
-          const { data } = e.response
-          if (data.detail) {
-            this.detailError = data.detail
-          } else {
-            this.errors = data
-          }
-        } else {
+        if (typeof e.response === 'undefined') {
           // General error
-          this.detailError = e.message
+          this.generalError = e.message
+        } else {
+          // Server reported error
+          this.valid = false
+          this.$refs.form.validate()
         }
       }
+    },
+
+    strongPasswordRule(password) {
+      this.passwordSuccess = ''
+
+      if (password.length === 0) {
+        return this.passwordHint
+      }
+
+      if (password.length >= 16) {
+        // Password is passphrase
+        this.passwordSuccess = 'Strong password'
+        return true
+      }
+
+      if (password.length < 8) {
+        return 'Password is too short. Minimum length is 8.'
+      }
+
+      if (!/[a-z]/.test(password)) {
+        return 'Password should contain at least one lower case character.'
+      }
+
+      if (!/[A-Z]/.test(password)) {
+        return 'Password should contain at least one upper case character.'
+      }
+
+      if (!/[0-9]/.test(password)) {
+        return 'Password should contain at least one digit.'
+      }
+
+      // Password is valid
+      this.passwordSuccess = 'Strong password'
+      return true
     },
   },
 

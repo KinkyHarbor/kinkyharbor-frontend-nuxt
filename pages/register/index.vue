@@ -228,7 +228,8 @@ export default {
           username: this.username,
           email: this.email,
           password: this.password,
-          password_confirm: this.password,
+          isAdult: this.adult,
+          acceptPrivacyAndTerms: this.privacyAndTerms,
         })
 
         this.step = 2
@@ -243,7 +244,6 @@ export default {
         } else {
           // Other error
           const { data } = e.response
-          console.log(data)
           this.usernameErrors = data.username ? data.username : []
           this.emailErrors = data.email ? data.email : []
           this.passwordErrors = data.password ? data.password : []
