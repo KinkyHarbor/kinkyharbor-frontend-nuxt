@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container>
     <v-row v-for="alert in alerts" :key="alert.message">
       <v-col cols="12">
         <v-row align="center" justify="center">

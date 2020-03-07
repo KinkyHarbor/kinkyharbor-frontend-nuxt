@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container>
     <v-row v-if="generalError" align="center" justify="center">
       <v-col cols="12" sm="8" md="6">
         <v-alert type="error">

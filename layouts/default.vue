@@ -118,13 +118,13 @@
       </v-menu>
     </v-app-bar>
     <v-content>
-      <v-container>
-        <v-alert v-if="demoMode" type="warning" dismissible>
+      <v-container v-if="demoMode">
+        <v-alert type="warning" dismissible>
           This is a demo instance. Don't use any private information. Database
           might be wiped as we see fit.
         </v-alert>
-        <nuxt />
       </v-container>
+      <nuxt />
     </v-content>
   </v-app>
 </template>
