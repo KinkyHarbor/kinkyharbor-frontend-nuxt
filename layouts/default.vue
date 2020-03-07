@@ -186,5 +186,14 @@ export default {
 
     ...mapState('auth', ['loggedIn', 'user']),
   },
+
+  watch: {
+    loggedIn(loggedIn) {
+      if (!loggedIn) {
+        // Force close drawer on logout
+        this.drawer = false
+      }
+    },
+  },
 }
 </script>
