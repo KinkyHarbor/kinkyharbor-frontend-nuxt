@@ -57,7 +57,7 @@
                     nuxt
                   >
                     <v-list-item-avatar>
-                      <v-img src="http://i.pravatar.cc/64"></v-img>
+                      <v-img src="https://i.pravatar.cc/64"></v-img>
                     </v-list-item-avatar>
 
                     <v-list-item-content>
@@ -75,7 +75,7 @@
 
                   <v-list-item v-for="group in groups" :key="group.id">
                     <v-list-item-avatar>
-                      <v-img src="http://i.pravatar.cc/64"></v-img>
+                      <v-img src="https://i.pravatar.cc/64"></v-img>
                     </v-list-item-avatar>
 
                     <v-list-item-content>
@@ -95,7 +95,7 @@
 
                   <v-list-item v-for="page in pages" :key="page.id">
                     <v-list-item-avatar>
-                      <v-img src="http://i.pravatar.cc/64"></v-img>
+                      <v-img src="https://i.pravatar.cc/64"></v-img>
                     </v-list-item-avatar>
 
                     <v-list-item-content>
@@ -113,7 +113,7 @@
 
                   <v-list-item v-for="event in events" :key="event.id">
                     <v-list-item-avatar>
-                      <v-img src="http://i.pravatar.cc/64"></v-img>
+                      <v-img src="https://i.pravatar.cc/64"></v-img>
                     </v-list-item-avatar>
 
                     <v-list-item-content>
@@ -138,7 +138,7 @@
                     nuxt
                   >
                     <v-list-item-avatar>
-                      <v-img src="http://i.pravatar.cc/64"></v-img>
+                      <v-img src="https://i.pravatar.cc/64"></v-img>
                     </v-list-item-avatar>
 
                     <v-list-item-content>
@@ -160,7 +160,7 @@
 
                   <v-list-item v-for="group in groups" :key="group.id">
                     <v-list-item-avatar>
-                      <v-img src="http://i.pravatar.cc/64"></v-img>
+                      <v-img src="https://i.pravatar.cc/64"></v-img>
                     </v-list-item-avatar>
 
                     <v-list-item-content>
@@ -182,7 +182,7 @@
 
                   <v-list-item v-for="page in pages" :key="page.id">
                     <v-list-item-avatar>
-                      <v-img src="http://i.pravatar.cc/64"></v-img>
+                      <v-img src="https://i.pravatar.cc/64"></v-img>
                     </v-list-item-avatar>
 
                     <v-list-item-content>
@@ -204,7 +204,7 @@
 
                   <v-list-item v-for="event in events" :key="event.id">
                     <v-list-item-avatar>
-                      <v-img src="http://i.pravatar.cc/64"></v-img>
+                      <v-img src="https://i.pravatar.cc/64"></v-img>
                     </v-list-item-avatar>
 
                     <v-list-item-content>
