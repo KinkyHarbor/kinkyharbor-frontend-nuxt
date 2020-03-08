@@ -1,4 +1,4 @@
 module.exports = {
-  com: process.env.DOMAIN_COM,
-  be: process.env.DOMAIN_BE,
+  en: process.env.DOMAIN_ENGLISH,
+  nl: process.env.DOMAIN_DUTCH,
 }

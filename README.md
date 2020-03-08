@@ -14,6 +14,12 @@
   <dt>DEMO (Bool)</dt>
   <dd>Set log level to DEBUG</dd>
   <dd>Default: False</dd>
+
+  <dt>DOMAIN_ENGLISH (String)</dt>
+  <dd>Domain for Engelish version of the app</dd>
+
+  <dt>DOMAIN_DUTCH (String)</dt>
+  <dd>Domain for Dutch version of the app</dd>
 </dl>
 
 ## Build Setup
