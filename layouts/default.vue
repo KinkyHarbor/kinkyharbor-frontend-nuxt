@@ -50,33 +50,19 @@
       </template>
     </v-navigation-drawer>
 
-    <v-app-bar app clipped-left>
+    <v-app-bar v-if="!searchMode" app clipped-left>
       <v-app-bar-nav-icon
-        v-if="!searchMode"
         class="hidden-md-and-up"
         @click.stop="drawer = !drawer"
       />
 
-      <v-text-field
-        v-if="searchMode"
-        v-model="searchString"
-        hide-details
-        prepend-icon="mdi-close"
-        append-outer-icon="mdi-magnify"
-        single-line
-        autofocus
-        @click:prepend.stop="searchMode = false"
-        @click:append-outer="search"
-        @keydown.esc="searchMode = false"
-      ></v-text-field>
-
-      <nuxt-link v-if="!searchMode" :to="homeLink" class="hidden-sm-and-up">
+      <nuxt-link :to="homeLink" class="hidden-sm-and-up">
         <v-btn icon>
           <v-icon large>mdi-anchor</v-icon>
         </v-btn>
       </nuxt-link>
 
-      <v-toolbar-title v-if="!searchMode">
+      <v-toolbar-title>
         <nuxt-link :to="homeLink" class="hidden-xs-only">
           <v-btn text large>
             <v-icon large left>mdi-anchor</v-icon>
@@ -93,7 +79,7 @@
         <v-btn text large>Transparency</v-btn>
       </nuxt-link>
 
-      <v-spacer v-if="!searchMode" />
+      <v-spacer />
 
       <nuxt-link v-if="!loggedIn" to="/login">
         <v-btn text large>Login</v-btn>
@@ -103,19 +89,15 @@
         <v-btn text large>Register</v-btn>
       </nuxt-link>
 
-      <v-btn v-if="loggedIn && !searchMode" icon nuxt to="/profile">
+      <v-btn v-if="loggedIn" icon nuxt to="/profile">
         <v-icon :large="$vuetify.breakpoint.xsOnly">mdi-account-circle</v-icon>
       </v-btn>
 
-      <v-btn
-        v-if="loggedIn && !searchMode"
-        icon
-        @click="searchMode = !searchMode"
-      >
+      <v-btn v-if="loggedIn" icon @click="searchMode = !searchMode">
         <v-icon :large="$vuetify.breakpoint.xsOnly">mdi-magnify</v-icon>
       </v-btn>
 
-      <v-menu v-if="loggedIn && !searchMode" :transition="false">
+      <v-menu v-if="loggedIn" :transition="false">
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
             <v-icon :large="$vuetify.breakpoint.xsOnly"
@@ -141,6 +123,24 @@
         </v-list>
       </v-menu>
     </v-app-bar>
+
+    <v-app-bar v-if="searchMode" app clipped-left>
+      <v-spacer class="hidden-xs-only" />
+      <v-text-field
+        v-model="searchQuery"
+        hide-details
+        prepend-icon="mdi-close"
+        append-outer-icon="mdi-magnify"
+        single-line
+        autofocus
+        @click:prepend.stop="closeSearch"
+        @click:append-outer="openSearchPage"
+        @keydown.esc="closeSearch"
+        @keydown.enter="openSearchPage"
+      ></v-text-field>
+      <v-spacer class="hidden-xs-only" />
+    </v-app-bar>
+
     <v-content>
       <v-container v-if="demoMode">
         <v-alert type="warning" dismissible>
@@ -161,7 +161,7 @@ export default {
     return {
       demoMode: process.env.demoMode,
       searchMode: false,
-      searchString: '',
+      searchQuery: '',
       drawer: Boolean(this.loggedIn),
       items: [
         {
@@ -223,7 +223,16 @@ export default {
   },
 
   methods: {
-    search() {},
+    openSearchPage() {
+      const searchQuery = this.searchQuery
+      this.closeSearch()
+      this.$router.push({ path: '/search', query: { q: searchQuery } })
+    },
+
+    closeSearch() {
+      this.searchMode = false
+      this.searchQuery = ''
+    },
   },
 }
 </script>
