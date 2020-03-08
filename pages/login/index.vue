@@ -15,12 +15,12 @@
         <v-row align="center" justify="center">
           <v-card min-width="100%">
             <v-card-text class="text-center">
-              <h2 class="my-5">Welcome back!</h2>
+              <h2 class="my-5">{{ $t('login.welcomeBack') }}</h2>
 
               <v-form @submit.prevent="login">
                 <v-text-field
                   v-model="username"
-                  label="Username or email"
+                  :label="$t('login.usernameEmail')"
                   required
                 ></v-text-field>
 
@@ -29,7 +29,7 @@
                   :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
                   :type="showPass ? 'text' : 'password'"
                   name="password"
-                  label="Password"
+                  :label="$t('Password')"
                   required
                   @click:append="showPass = !showPass"
                 ></v-text-field>
@@ -45,13 +45,17 @@
               </v-form>
 
               <p>
-                Don't have an account?
-                <nuxt-link to="/register">Register</nuxt-link>
+                {{ $t('login.noAccount') }}
+                <nuxt-link :to="localePath('/register')">
+                  {{ $t('Register') }}
+                </nuxt-link>
               </p>
 
               <p>
-                Forgotten your password?
-                <nuxt-link to="/login/request-reset">Reset</nuxt-link>
+                {{ $t('login.passwordForgotten') }}
+                <nuxt-link :to="localePath('/login/request-reset')">
+                  {{ $t('Reset') }}
+                </nuxt-link>
               </p>
             </v-card-text>
           </v-card>
@@ -65,6 +69,8 @@
 const qs = require('querystring')
 
 export default {
+  auth: false,
+
   data() {
     return {
       valid: true,

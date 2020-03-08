@@ -13,7 +13,7 @@
         <v-list-item
           v-for="(item, i) in navItems"
           :key="i"
-          :to="item.to"
+          :to="localePath(item.to)"
           :class="item.classes"
           router
           exact
@@ -29,7 +29,7 @@
 
       <template v-slot:append>
         <v-list v-if="loggedIn">
-          <v-list-item to="/about" router exact>
+          <v-list-item :to="localePath('/about')" router exact>
             <v-list-item-icon>
               <v-icon>mdi-information-outline</v-icon>
             </v-list-item-icon>
@@ -38,7 +38,7 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item to="/transparency" router exact>
+          <v-list-item :to="localePath('/transparency')" router exact>
             <v-list-item-icon>
               <v-icon>mdi-magnify-scan</v-icon>
             </v-list-item-icon>
@@ -56,14 +56,14 @@
         @click.stop="drawer = !drawer"
       />
 
-      <nuxt-link :to="homeLink" class="hidden-sm-and-up">
+      <nuxt-link :to="localePath(homeLink)" class="hidden-sm-and-up">
         <v-btn icon>
           <v-icon large>mdi-anchor</v-icon>
         </v-btn>
       </nuxt-link>
 
       <v-toolbar-title>
-        <nuxt-link :to="homeLink" class="hidden-xs-only">
+        <nuxt-link :to="localePath(homeLink)" class="hidden-xs-only">
           <v-btn text large>
             <v-icon large left>mdi-anchor</v-icon>
             {{ title }}
@@ -71,25 +71,33 @@
         </nuxt-link>
       </v-toolbar-title>
 
-      <nuxt-link v-if="!loggedIn" to="/about" class="hidden-sm-and-down">
-        <v-btn text large>About</v-btn>
+      <nuxt-link
+        v-if="!loggedIn"
+        :to="localePath('/about')"
+        class="hidden-sm-and-down"
+      >
+        <v-btn text large>{{ $t('About') }}</v-btn>
       </nuxt-link>
 
-      <nuxt-link v-if="!loggedIn" to="/transparency" class="hidden-sm-and-down">
+      <nuxt-link
+        v-if="!loggedIn"
+        :to="localePath('/transparency')"
+        class="hidden-sm-and-down"
+      >
         <v-btn text large>Transparency</v-btn>
       </nuxt-link>
 
       <v-spacer />
 
-      <nuxt-link v-if="!loggedIn" to="/login">
+      <nuxt-link v-if="!loggedIn" :to="localePath('/login')">
         <v-btn text large>Login</v-btn>
       </nuxt-link>
 
-      <nuxt-link v-if="!loggedIn" to="/register">
-        <v-btn text large>Register</v-btn>
+      <nuxt-link v-if="!loggedIn" :to="localePath('/register')">
+        <v-btn text large>{{ $t('register') }}</v-btn>
       </nuxt-link>
 
-      <v-btn v-if="loggedIn" icon nuxt to="/profile">
+      <v-btn v-if="loggedIn" icon nuxt :to="localePath('/profile')">
         <v-icon :large="$vuetify.breakpoint.xsOnly">mdi-account-circle</v-icon>
       </v-btn>
 
@@ -107,14 +115,14 @@
         </template>
 
         <v-list>
-          <v-list-item to="/settings" nuxt>
+          <v-list-item :to="localePath('/settings')" nuxt>
             <v-list-item-icon>
               <v-icon>mdi-tune</v-icon>
             </v-list-item-icon>
             <v-list-item-title>Settings</v-list-item-title>
           </v-list-item>
 
-          <v-list-item to="/logout" nuxt>
+          <v-list-item :to="localePath('/logout')" nuxt>
             <v-list-item-icon>
               <v-icon>mdi-logout</v-icon>
             </v-list-item-icon>
@@ -133,9 +141,9 @@
         append-outer-icon="mdi-magnify"
         single-line
         autofocus
-        @click:prepend.stop="closeSearch"
+        @click:prepend.stop="closeSearchMode"
         @click:append-outer="openSearchPage"
-        @keydown.esc="closeSearch"
+        @keydown.esc="closeSearchMode"
         @keydown.enter="openSearchPage"
       ></v-text-field>
       <v-spacer class="hidden-xs-only" />
@@ -225,14 +233,23 @@ export default {
   methods: {
     openSearchPage() {
       const searchQuery = this.searchQuery
-      this.closeSearch()
-      this.$router.push({ path: '/search', query: { q: searchQuery } })
+      this.closeSearchMode()
+      this.$router.push(
+        this.localePath({
+          path: '/search',
+          query: { q: searchQuery },
+        })
+      )
     },
 
-    closeSearch() {
+    closeSearchMode() {
       this.searchMode = false
       this.searchQuery = ''
     },
+  },
+
+  head() {
+    return this.$nuxtI18nSeo()
   },
 }
 </script>

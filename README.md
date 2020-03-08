@@ -2,9 +2,23 @@
 
 > Frontend using Nuxt.js
 
+### Variables
+
+<dl>
+  <dt>KH_BASE_URL (String)</dt>
+  <dd>Sets base url of application. This is used for SEO.</dd>
+
+  <dt>API_URL (String)</dt>
+  <dd>Sets url of API</dd>
+
+  <dt>DEMO (Bool)</dt>
+  <dd>Set log level to DEBUG</dd>
+  <dd>Default: False</dd>
+</dl>
+
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ yarn install
 

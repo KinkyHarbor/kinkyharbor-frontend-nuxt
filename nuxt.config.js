@@ -142,6 +142,31 @@ export default {
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
+    [
+      'nuxt-i18n',
+      {
+        locales: [
+          {
+            code: 'en',
+            iso: 'en-US',
+            name: 'English',
+            file: 'en-US.js',
+          },
+          {
+            code: 'nl',
+            iso: 'nl-BE',
+            name: 'Nederlands',
+            file: 'nl-BE.js',
+          },
+        ],
+        defaultLocale: 'en',
+        fallbackLocale: 'en',
+        lazy: true,
+        langDir: 'lang/',
+        baseUrl: process.env.KH_BASE_URL || 'https://kinkyharbor.com',
+        differentDomains: process.env.NODE_ENV === 'production',
+      },
+    ],
   ],
   /*
    ** Axios module configuration
