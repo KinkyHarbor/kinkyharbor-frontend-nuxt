@@ -5,7 +5,9 @@
         <v-icon size="100px">mdi-anchor</v-icon>
       </div>
       <v-card>
-        <v-card-title class="headline">Transparency</v-card-title>
+        <v-card-title class="headline">
+          {{ this.$t('Transparency') }}
+        </v-card-title>
         <v-card-text>
           <p>&hellip;</p>
         </v-card-text>
@@ -18,7 +20,7 @@
 export default {
   auth: false,
   head() {
-    return { title: 'Transparency' }
+    return { title: this.$t('Transparency') }
   },
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <h1>Settings</h1>
+  <h1>{{ this.$t('Settings') }}</h1>
 </template>
 
 <script>
@@ -9,7 +9,7 @@ export default {
   },
 
   head() {
-    return { title: 'Settings' }
+    return { title: this.$t('Settings') }
   },
 }
 </script>

@@ -19,27 +19,27 @@
 
           <v-tab href="#tab-all">
             <v-icon left>mdi-anchor</v-icon>
-            All
+            {{ $t('All') }}
           </v-tab>
 
           <v-tab href="#tab-people">
             <v-icon>mdi-account</v-icon>
-            People
+            {{ $t('People') }}
           </v-tab>
 
           <v-tab href="#tab-groups">
             <v-icon>mdi-account-multiple</v-icon>
-            Groups
+            {{ $t('Groups') }}
           </v-tab>
 
           <v-tab href="#tab-pages">
             <v-icon>mdi-book</v-icon>
-            Pages
+            {{ $t('Pages') }}
           </v-tab>
 
           <v-tab href="#tab-events">
             <v-icon>mdi-calendar</v-icon>
-            Events
+            {{ $t('Events') }}
           </v-tab>
         </v-tabs>
 
@@ -48,12 +48,12 @@
             <v-row>
               <v-col cols="12" sm="6">
                 <v-list subheader>
-                  <v-subheader>People</v-subheader>
+                  <v-subheader>{{ $t('People') }}</v-subheader>
 
                   <v-list-item
                     v-for="user in users"
                     :key="user.id"
-                    :to="'/profile/' + user.username + '/'"
+                    :to="localePath('/profile/' + user.username + '/')"
                     nuxt
                   >
                     <v-list-item-avatar>
@@ -71,7 +71,7 @@
 
               <v-col cols="12" sm="6">
                 <v-list subheader>
-                  <v-subheader>Groups</v-subheader>
+                  <v-subheader>{{ $t('Groups') }}</v-subheader>
 
                   <v-list-item v-for="group in groups" :key="group.id">
                     <v-list-item-avatar>
@@ -91,7 +91,7 @@
             <v-row>
               <v-col cols="12" sm="6">
                 <v-list subheader>
-                  <v-subheader>Pages</v-subheader>
+                  <v-subheader>{{ $t('Pages') }}</v-subheader>
 
                   <v-list-item v-for="page in pages" :key="page.id">
                     <v-list-item-avatar>
@@ -109,7 +109,7 @@
 
               <v-col cols="12" sm="6">
                 <v-list subheader>
-                  <v-subheader>Events</v-subheader>
+                  <v-subheader>{{ $t('Events') }}</v-subheader>
 
                   <v-list-item v-for="event in events" :key="event.id">
                     <v-list-item-avatar>
@@ -129,12 +129,12 @@
             <v-row>
               <v-col cols="12">
                 <v-list subheader>
-                  <v-subheader>People</v-subheader>
+                  <v-subheader>{{ $t('People') }}</v-subheader>
 
                   <v-list-item
                     v-for="user in users"
                     :key="user.id"
-                    :to="'/profile/' + user.username + '/'"
+                    :to="localePath('/profile/' + user.username + '/')"
                     nuxt
                   >
                     <v-list-item-avatar>
@@ -156,7 +156,7 @@
             <v-row>
               <v-col cols="12">
                 <v-list subheader>
-                  <v-subheader>Groups</v-subheader>
+                  <v-subheader>{{ $t('Groups') }}</v-subheader>
 
                   <v-list-item v-for="group in groups" :key="group.id">
                     <v-list-item-avatar>
@@ -178,7 +178,7 @@
             <v-row>
               <v-col cols="12">
                 <v-list subheader>
-                  <v-subheader>Pages</v-subheader>
+                  <v-subheader>{{ $t('Pages') }}</v-subheader>
 
                   <v-list-item v-for="page in pages" :key="page.id">
                     <v-list-item-avatar>
@@ -200,7 +200,7 @@
             <v-row>
               <v-col cols="12">
                 <v-list subheader>
-                  <v-subheader>Events</v-subheader>
+                  <v-subheader>{{ $t('Events') }}</v-subheader>
 
                   <v-list-item v-for="event in events" :key="event.id">
                     <v-list-item-avatar>
@@ -266,7 +266,7 @@ export default {
   },
 
   head() {
-    return { title: 'Search' }
+    return { title: this.$t('Search') }
   },
 }
 </script>

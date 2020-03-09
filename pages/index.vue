@@ -18,11 +18,11 @@
 export default {
   auth: false,
   head() {
-    return { title: 'Home' }
+    return { title: this.$t('Home') }
   },
-  middleware({ store, redirect }) {
+  middleware({ app, store, redirect }) {
     if (store.state.auth.loggedIn) {
-      return redirect('/feed')
+      return redirect(app.localePath('/feed'))
     }
   },
 }

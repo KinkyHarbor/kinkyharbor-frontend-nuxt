@@ -40,7 +40,7 @@
                   class="mr-4 my-5"
                   type="submit"
                   block
-                  >Login</v-btn
+                  >{{ $t('Login') }}</v-btn
                 >
               </v-form>
 
@@ -90,14 +90,14 @@ export default {
       if (this.register) {
         alerts.push({
           type: 'success',
-          message: 'Please login to finalize registration.',
+          message: this.$t('login.successRegister'),
         })
       }
 
       if (this.reset) {
         alerts.push({
           type: 'success',
-          message: 'Password changed successfully.',
+          message: this.$t('login.successReset'),
         })
       }
 
@@ -143,7 +143,7 @@ export default {
   },
 
   head() {
-    return { title: 'Login' }
+    return { title: this.$t('Login') }
   },
 }
 </script>

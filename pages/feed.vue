@@ -28,7 +28,7 @@
 <script>
 export default {
   head() {
-    return { title: 'Feed' }
+    return { title: this.$t('Feed') }
   },
 }
 </script>

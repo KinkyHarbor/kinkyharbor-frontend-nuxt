@@ -13,7 +13,7 @@
         <v-row align="center" justify="center">
           <v-card min-width="100%">
             <v-card-text class="text-center">
-              <h2 class="my-5">Reset your password</h2>
+              <h2 class="my-5">{{ $t('resetPassword.resetPassword') }}</h2>
 
               <v-form
                 ref="form"
@@ -40,7 +40,7 @@
                   class="mr-4 my-5"
                   type="submit"
                   block
-                  >Reset password
+                  >{{ $t('Reset') }}
                 </v-btn>
               </v-form>
             </v-card-text>
@@ -77,7 +77,9 @@ export default {
           password: this.password,
         })
 
-        this.$router.replace({ path: '/login', query: { reset: 'success' } })
+        this.$router.replace(
+          this.localePath({ path: '/login', query: { reset: 'success' } })
+        )
       } catch (e) {
         if (typeof e.response === 'undefined') {
           // General error

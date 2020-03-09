@@ -4,7 +4,7 @@
       <v-col cols="12">
         <v-row align="center" justify="center">
           <v-alert type="success">
-            Password reset verification has been sent, if email exists.
+            {{ $t('resetPassword.resetSent') }}
           </v-alert>
         </v-row>
       </v-col>
@@ -15,7 +15,7 @@
         <v-row align="center" justify="center">
           <v-card min-width="100%">
             <v-card-text class="text-center">
-              <h2 class="my-5">Reset your password</h2>
+              <h2 class="my-5">{{ $t('resetPassword.resetPassword') }}</h2>
 
               <v-form @submit.prevent="requestReset">
                 <v-text-field
@@ -32,7 +32,7 @@
                   type="submit"
                   block
                 >
-                  Reset password
+                  {{ $t('Reset') }}
                 </v-btn>
               </v-form>
             </v-card-text>

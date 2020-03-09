@@ -34,7 +34,7 @@
               <v-icon>mdi-information-outline</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title>About</v-list-item-title>
+              <v-list-item-title>{{ $t('About') }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
 
@@ -43,7 +43,7 @@
               <v-icon>mdi-magnify-scan</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title>Transparency</v-list-item-title>
+              <v-list-item-title>{{ $t('Transparency') }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -84,17 +84,17 @@
         :to="localePath('/transparency')"
         class="hidden-sm-and-down"
       >
-        <v-btn text large>Transparency</v-btn>
+        <v-btn text large>{{ $t('Transparency') }}</v-btn>
       </nuxt-link>
 
       <v-spacer />
 
       <nuxt-link v-if="!loggedIn" :to="localePath('/login')">
-        <v-btn text large>Login</v-btn>
+        <v-btn text large>{{ $t('Login') }}</v-btn>
       </nuxt-link>
 
       <nuxt-link v-if="!loggedIn" :to="localePath('/register')">
-        <v-btn text large>{{ $t('register') }}</v-btn>
+        <v-btn text large>{{ $t('Register') }}</v-btn>
       </nuxt-link>
 
       <v-btn v-if="loggedIn" icon nuxt :to="localePath('/profile')">
@@ -108,9 +108,9 @@
       <v-menu v-if="loggedIn" :transition="false">
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
-            <v-icon :large="$vuetify.breakpoint.xsOnly"
-              >mdi-dots-vertical</v-icon
-            >
+            <v-icon :large="$vuetify.breakpoint.xsOnly">
+              mdi-dots-vertical
+            </v-icon>
           </v-btn>
         </template>
 
@@ -119,14 +119,14 @@
             <v-list-item-icon>
               <v-icon>mdi-tune</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Settings</v-list-item-title>
+            <v-list-item-title>{{ $t('Settings') }}</v-list-item-title>
           </v-list-item>
 
           <v-list-item :to="localePath('/logout')" nuxt>
             <v-list-item-icon>
               <v-icon>mdi-logout</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Logout</v-list-item-title>
+            <v-list-item-title>{{ $t('Logout') }}</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -152,8 +152,7 @@
     <v-content>
       <v-container v-if="demoMode">
         <v-alert type="warning" dismissible>
-          This is a demo instance. Don't use any private information. Database
-          might be wiped as we see fit.
+          {{ $t('demo.warning') }}
         </v-alert>
       </v-container>
       <nuxt />
@@ -174,31 +173,31 @@ export default {
       items: [
         {
           icon: 'mdi-home',
-          title: 'Home',
+          title: this.$t('Home'),
           to: '/',
           public: true,
         },
         {
           icon: 'mdi-information-outline',
-          title: 'About',
+          title: this.$t('About'),
           to: '/about',
           public: true,
         },
         {
           icon: 'mdi-magnify-scan',
-          title: 'Transparency',
+          title: this.$t('Transparency'),
           to: '/transparency',
           public: true,
         },
         {
           icon: 'mdi-format-list-bulleted-square',
-          title: 'Feed',
+          title: this.$t('Feed'),
           to: '/feed',
           private: true,
         },
         {
           icon: 'mdi-account-group',
-          title: 'Groups',
+          title: this.$t('Groups'),
           to: '/groups',
           private: true,
         },
