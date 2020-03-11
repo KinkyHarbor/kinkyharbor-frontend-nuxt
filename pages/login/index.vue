@@ -66,8 +66,6 @@
 </template>
 
 <script>
-const qs = require('querystring')
-
 export default {
   auth: false,
 
@@ -116,14 +114,10 @@ export default {
     async login() {
       try {
         await this.$auth.loginWith('local', {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          data: qs.stringify({
-            grant_type: 'password',
+          data: {
             username: this.username,
             password: this.password,
-          }),
+          },
         })
 
         // Redirect to homepage
