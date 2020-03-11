@@ -11,11 +11,14 @@ export default {
   Pages: 'Pages',
   Password: 'Password',
   People: 'People',
+  PrivacyPolicy: 'Privacy Policy',
   Register: 'Register',
   Reset: 'Reset',
   Search: 'Search',
   Settings: 'Settings',
+  TermsAndConditions: 'Terms and Conditions',
   Transparency: 'Transparency',
+  Username: 'Username',
 
   demo: {
     warning:
@@ -29,6 +32,23 @@ export default {
     successReset: 'Password changed successfully.',
     usernameEmail: 'Username or email',
     welcomeBack: 'Welcome back!',
+  },
+
+  register: {
+    createAccount: 'Create account',
+    dareToMakeAccount: 'Do you dare to make an account?',
+    confirmAdult: "I'm 18 or older",
+    confirmPrivacyAndTerms: 'I agree with the {privacy} and {terms}',
+    consentImportant: 'Consent is important',
+    passwordHint: 'Password hint',
+    passwordHintContent:
+      'Glue four or more words to each other. Simple to remember and hard to hack. For example, "IReallyLikeKinkyHarbor".',
+    passwordHintDontCopy: "PS: Don't copy this example :D",
+    timeToSail: 'Time to sail!',
+    registerSuccessful:
+      'Registration successful. Please check your mailbox for a verification mail.',
+    usernameAlreadyTaken: 'Username is already taken',
+    verifyEmail: 'Verify mail address',
   },
 
   resetPassword: {

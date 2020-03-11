@@ -13,16 +13,20 @@
         <v-stepper :value="step">
           <v-stepper-header>
             <v-stepper-step step="1" :complete="step > 1">
-              Create account
+              {{ $t('register.createAccount') }}
             </v-stepper-step>
             <v-divider></v-divider>
-            <v-stepper-step step="2">Verify mail address</v-stepper-step>
+            <v-stepper-step step="2">
+              {{ $t('register.verifyEmail') }}
+            </v-stepper-step>
             <v-divider></v-divider>
-            <v-stepper-step step="3">Time to sail!</v-stepper-step>
+            <v-stepper-step step="3">
+              {{ $t('register.timeToSail') }}
+            </v-stepper-step>
           </v-stepper-header>
 
           <v-stepper-content step="1">
-            <h2 class="title my-5">Do you dare to make an account?</h2>
+            <h2 class="title my-5">{{ $t('register.dareToMakeAccount') }}</h2>
 
             <v-form
               ref="form"
@@ -34,7 +38,7 @@
                 v-model="username"
                 :rules="usernameRules"
                 :error-messages="usernameErrors"
-                label="Username"
+                :label="$t('Username')"
                 autofocus
                 counter="40"
                 maxlength="40"
@@ -46,7 +50,7 @@
                 :rules="emailRules"
                 :error-messages="emailErrors"
                 type="email"
-                label="Email"
+                :label="$t('Email')"
                 @keydown="resetEmailErrors"
               ></v-text-field>
 
@@ -57,7 +61,7 @@
                 :rules="passwordRules"
                 :error-messages="passwordErrors"
                 name="password"
-                label="Password"
+                :label="$t('Password')"
                 :hint="passwordHint"
                 persistent-hint
                 counter
@@ -68,10 +72,13 @@
 
               <v-divider class="mt-5"></v-divider>
 
-              <header class="mt-5">Legal stuff</header>
+              <header class="mt-5">
+                {{ $t('register.consentImportant') }}:
+              </header>
+
               <v-checkbox
                 v-model="adult"
-                label="I'm 18 or older"
+                :label="$t('register.confirmAdult')"
                 class="mx-2"
                 :rules="mandatoryCheckbox"
               ></v-checkbox>
@@ -82,16 +89,23 @@
                 :rules="mandatoryCheckbox"
               >
                 <template v-slot:label>
-                  <div>
-                    I agree with the
-                    <a href="/privacy" target="_blank" @click.stop>
-                      privacy policy
-                    </a>
-                    and
-                    <a href="/terms-and-conditions" target="_blank" @click.stop>
-                      terms and conditions
-                    </a>
-                  </div>
+                  <i18n path="register.confirmPrivacyAndTerms" tag="div">
+                    <template #privacy>
+                      <a href="/privacy" target="_blank" @click.stop>
+                        {{ $t('PrivacyPolicy') }}
+                      </a>
+                    </template>
+
+                    <template #terms>
+                      <a
+                        href="/terms-and-conditions"
+                        target="_blank"
+                        @click.stop
+                      >
+                        {{ $t('TermsAndConditions') }}
+                      </a>
+                    </template>
+                  </i18n>
                 </template>
               </v-checkbox>
 
@@ -101,7 +115,7 @@
                 class="mr-4 my-5"
                 type="submit"
                 block
-                >Register</v-btn
+                >{{ $t('Register') }}</v-btn
               >
             </v-form>
           </v-stepper-content>
@@ -109,8 +123,7 @@
           <v-stepper-content step="2" class="text-center">
             <v-icon size="150px">mdi-pirate</v-icon>
             <p class="py-5">
-              Registration successful. Please check your mailbox for a
-              verification mail.
+              {{ $t('register.registerSuccessful') }}
             </p>
           </v-stepper-content>
         </v-stepper>
@@ -120,12 +133,17 @@
     <v-row v-if="step === 1" align="center" justify="center">
       <v-col cols="12" sm="8" md="6">
         <v-alert color="grey darken-4" class="text--secondary">
-          <p><strong>Password tip</strong></p>
           <p>
-            Glue four or more words to each other. Simple to remember and hard
-            to hack. For example, "IReallyLikeKinkyHarbor".
+            <strong>
+              {{ $t('register.passwordHint') }}
+            </strong>
           </p>
-          <p>PS: Don&apos;t use this example :D</p>
+          <p>
+            {{ $t('register.passwordHintContent') }}
+          </p>
+          <p>
+            {{ $t('register.passwordHintDontCopy') }}
+          </p>
         </v-alert>
       </v-col>
     </v-row>
@@ -244,7 +262,7 @@ export default {
           this.generalError = e.message
         } else if (e.response.status === 409) {
           // Username taken
-          this.usernameErrors = ['Username already taken']
+          this.usernameErrors = [this.$t('register.usernameAlreadyTaken')]
           this.serverError = true
         } else {
           // Other error

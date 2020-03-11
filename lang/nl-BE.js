@@ -11,11 +11,14 @@ export default {
   Pages: "Pagina's",
   Password: 'Wachtwoord',
   People: 'Personen',
+  PrivacyPolicy: 'Privacy overeenkomst',
   Register: 'Registreer',
   Reset: 'Reset',
   Search: 'Zoeken',
   Settings: 'Instellingen',
+  TermsAndConditions: 'Algemene voorwaarden',
   Transparency: 'Transparantie',
+  Username: 'Gebruikersnaam',
 
   demo: {
     warning:
@@ -29,6 +32,23 @@ export default {
     successReset: 'Wachtwoord is aangepast',
     usernameEmail: 'Gebruikersnaam of email',
     welcomeBack: 'Welkom terug!',
+  },
+
+  register: {
+    createAccount: 'Account maken',
+    dareToMakeAccount: 'Durf jij het aan om een account te maken?',
+    confirmAdult: 'Ik ben 18 of ouder',
+    confirmPrivacyAndTerms: 'Ik ga akkoord met de {privacy} en {terms}',
+    consentImportant: 'Consent is belangrijk',
+    passwordHint: 'Wachtwoordtip',
+    passwordHintContent:
+      'Plak vier of meer woorden achter elkaar. Gemakkelijk te onthouden en moeilijk te hacken. Bijvoorbeeld, "KinkyHarborIsEnormLeuk".',
+    passwordHintDontCopy: 'PS: Kopieer dit voorbeeld niet :D',
+    timeToSail: 'Klaar om te gaan!',
+    registerSuccessful:
+      'Registratie is gelukt. Gelieve uw mailbox te controleren voor een verificatiemail.',
+    usernameAlreadyTaken: 'Gebruikersnaam is bezet',
+    verifyEmail: 'Verifieer mailadres',
   },
 
   resetPassword: {
