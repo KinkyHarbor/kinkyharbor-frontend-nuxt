@@ -129,7 +129,7 @@ export default {
           this.loginError = e.message
         } else {
           // Server reported error
-          this.loginError = e.response.data.detail
+          this.loginError = e.response.data.msg
         }
         this.register = ''
       }
