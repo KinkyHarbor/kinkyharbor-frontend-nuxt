@@ -164,7 +164,6 @@ export default {
         lazy: true,
         langDir: 'lang/',
         baseUrl: process.env.KH_BASE_URL || 'https://kinkyharbor.com',
-        differentDomains: process.env.NODE_ENV === 'production',
       },
     ],
   ],
