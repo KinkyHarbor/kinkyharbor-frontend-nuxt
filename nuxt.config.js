@@ -180,15 +180,28 @@ export default {
   auth: {
     strategies: {
       local: {
+        _scheme: 'refresh',
+        token: {
+          property: 'access_token',
+          maxAge: 60 * 15,
+        },
+        expiresAt: 'exp',
+        refreshToken: {
+          property: 'refresh_token',
+          maxAge: 60 * 60 * 24 * 3,
+        },
+        user: false,
         endpoints: {
           login: {
             url: '/auth/login/',
             method: 'post',
             propertyName: 'access_token',
           },
+          refresh: { url: '/auth/refresh', method: 'post' },
           logout: false,
           user: { url: '/users/me/', method: 'get', propertyName: false },
         },
+        autoLogout: true,
       },
     },
     redirect: {

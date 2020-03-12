@@ -14,7 +14,7 @@
     "prod": "yarn build && yarn start"
   },
   "dependencies": {
-    "@nuxtjs/auth": "^4.8.5",
+    "@nuxtjs/auth": "https://github.com/nuxt-community/auth-module.git#feat/refresh",
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/pwa": "^3.0.0-0",
