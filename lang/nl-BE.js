@@ -56,4 +56,11 @@ export default {
     resetSent:
       'Verificatiemail is verzonden, indien dit mailadres gelinkt is aan een account.',
   },
+
+  search: {
+    noPeopleFound: 'Geen personen gevonden',
+    noGroupsFound: 'Geen groupen gevonden',
+    noPagesFound: "Geen pagina's gevonden",
+    noEventsFound: 'Geen evenementen gevonden',
+  },
 }

@@ -66,6 +66,14 @@
                       ></v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
+
+                  <v-list-item v-if="users.length === 0">
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        {{ $t('search.noPeopleFound') }}
+                      </v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
                 </v-list>
               </v-col>
 
@@ -82,6 +90,14 @@
                       <v-list-item-title
                         v-text="group.display_name"
                       ></v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+
+                  <v-list-item v-if="groups.length === 0">
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        {{ $t('search.noGroupsFound') }}
+                      </v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
                 </v-list>
@@ -104,6 +120,14 @@
                       ></v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
+
+                  <v-list-item v-if="pages.length === 0">
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        {{ $t('search.noPagesFound') }}
+                      </v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
                 </v-list>
               </v-col>
 
@@ -118,6 +142,14 @@
 
                     <v-list-item-content>
                       <v-list-item-title v-text="item"></v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+
+                  <v-list-item v-if="events.length === 0">
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        {{ $t('search.noEventsFound') }}
+                      </v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
                 </v-list>
@@ -147,6 +179,14 @@
                       ></v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
+
+                  <v-list-item v-if="users.length === 0">
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        {{ $t('search.noPeopleFound') }}
+                      </v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
                 </v-list>
               </v-col>
             </v-row>
@@ -167,6 +207,14 @@
                       <v-list-item-title
                         v-text="group.display_name"
                       ></v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+
+                  <v-list-item v-if="groups.length === 0">
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        {{ $t('search.noGroupsFound') }}
+                      </v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
                 </v-list>
@@ -191,6 +239,14 @@
                       ></v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
+
+                  <v-list-item v-if="pages.length === 0">
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        {{ $t('search.noPagesFound') }}
+                      </v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
                 </v-list>
               </v-col>
             </v-row>
@@ -209,6 +265,14 @@
 
                     <v-list-item-content>
                       <v-list-item-title v-text="item"></v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+
+                  <v-list-item v-if="events.length === 0">
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        {{ $t('search.noEventsFound') }}
+                      </v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
                 </v-list>

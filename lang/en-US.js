@@ -55,4 +55,11 @@ export default {
     resetPassword: 'Reset your password',
     resetSent: 'Password reset verification has been sent, if email exists.',
   },
+
+  search: {
+    noPeopleFound: 'No people found',
+    noGroupsFound: 'No groups found',
+    noPagesFound: 'No pages found',
+    noEventsFound: 'No events found',
+  },
 }
