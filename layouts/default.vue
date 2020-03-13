@@ -97,7 +97,7 @@
         <v-btn text large>{{ $t('Register') }}</v-btn>
       </nuxt-link>
 
-      <v-btn v-if="loggedIn" icon nuxt :to="localePath('/profile')">
+      <v-btn v-if="loggedIn" icon nuxt :to="localePath('/profile/me')">
         <v-icon :large="$vuetify.breakpoint.xsOnly">mdi-account-circle</v-icon>
       </v-btn>
 
