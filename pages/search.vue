@@ -53,7 +53,7 @@
                   <v-list-item
                     v-for="user in users"
                     :key="user.id"
-                    :to="localePath('/profile/' + user.username + '/')"
+                    :to="localePath('/profile/' + user.username)"
                     nuxt
                   >
                     <v-list-item-avatar>
@@ -166,7 +166,7 @@
                   <v-list-item
                     v-for="user in users"
                     :key="user.id"
-                    :to="localePath('/profile/' + user.username + '/')"
+                    :to="localePath('/profile/' + user.username)"
                     nuxt
                   >
                     <v-list-item-avatar>
