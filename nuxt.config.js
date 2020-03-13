@@ -207,6 +207,7 @@ export default {
     redirect: {
       home: '/feed',
     },
+    plugins: ['~/plugins/auth_redirect-to-locale.js'],
   },
   /*
    ** vuetify module configuration

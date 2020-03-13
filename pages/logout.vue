@@ -8,7 +8,7 @@ export default {
 
   async asyncData(context) {
     await context.$auth.logout()
-    context.redirect('/')
+    context.redirect(context.app.localePath('/'))
   },
 }
 </script>
