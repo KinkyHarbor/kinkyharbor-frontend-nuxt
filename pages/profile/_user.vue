@@ -3,10 +3,16 @@
     <v-row>
       <v-col cols="12" md="6">
         <v-card>
-          <v-card-title> {{ profile.display_name }} </v-card-title>
-          <v-card-subtitle
-            >{{ profile.gender || 'Unknown' }} - 20</v-card-subtitle
-          >
+          <v-card-title>
+            {{ profile.display_name }}
+            <v-spacer></v-spacer>
+            <v-card-actions v-if="profileIsMe">
+              <v-btn text nuxt :to="localePath('/profile/edit')">EDIT</v-btn>
+            </v-card-actions>
+          </v-card-title>
+          <v-card-subtitle>
+            {{ profile.gender || 'Unknown' }} - 20
+          </v-card-subtitle>
           <v-container fluid>
             <v-row>
               <v-col>
@@ -234,13 +240,13 @@ export default {
       })
   },
 
-  data() {
-    return {}
-  },
-
   computed: {
+    profileIsMe() {
+      return this.user.username === this.profile.username
+    },
+
     title() {
-      if (this.user.username === this.profile.username) {
+      if (this.profileIsMe) {
         return 'My profile'
       }
       return this.profile.display_name
