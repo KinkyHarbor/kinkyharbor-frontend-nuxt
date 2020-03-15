@@ -1,6 +1,7 @@
 export default {
   About: 'Over',
   All: 'Alles',
+  Bio: 'Bio',
   Cancel: 'Annuleren',
   Current: 'Huidig',
   Email: 'Email',

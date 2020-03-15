@@ -7,8 +7,10 @@
             Edit profile
           </v-card-title>
           <v-card-text>
-            <v-form>
+            <v-form @submit.prevent="updateUser">
               <v-combobox
+                v-model="newGender"
+                @update:search-input="updateGender"
                 :items="genders"
                 hide-selected
                 persistent-hint
@@ -17,9 +19,10 @@
               ></v-combobox>
 
               <v-textarea
-                v-model="newUser.bio"
+                v-model="newBio"
                 name="input-bio"
                 :label="$t('Bio')"
+                class="mt-5"
               ></v-textarea>
 
               <v-btn color="success" type="submit" class="mt-5">{{
@@ -42,12 +45,9 @@ import { mapState } from 'vuex'
 export default {
   data() {
     return {
-      newUser: {},
-      newPassword: '',
-      showNewPass: false,
-      password: '',
-      showPass: false,
+      newBio: '',
       genders: ['Hetero', 'Homo', 'Bi'],
+      newGender: '',
     }
   },
 
@@ -56,6 +56,26 @@ export default {
   },
 
   methods: {
+    updateGender(newValue) {
+      // v-model is too lazy, force update
+      this.newGender = newValue
+    },
+
+    updateUser() {
+      this.$axios
+        .$patch('/users/me/', {
+          bio: this.newBio,
+          gender: this.newGender,
+        })
+        .then((data) => {
+          return this.$auth.fetchUser()
+        })
+        .then((_) => {
+          this.$router.push(this.localePath('/profile/me'))
+        })
+        .catch((e) => console.log(e))
+    },
+
     cancelEdit() {
       // If nothing changed
       this.$router.go(-1)
@@ -63,7 +83,8 @@ export default {
   },
 
   created() {
-    this.newUser = { ...this.user }
+    this.newBio = this.user.bio
+    this.newGender = this.user.gender
   },
 
   head() {
