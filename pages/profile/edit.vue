@@ -17,12 +17,17 @@
               ></v-combobox>
 
               <v-textarea
+                v-model="newUser.bio"
                 name="input-bio"
                 :label="$t('Bio')"
-                v-model="newUser.bio"
               ></v-textarea>
 
-              <v-btn color="success" class="mt-5">{{ $t('Save') }}</v-btn>
+              <v-btn color="success" type="submit" class="mt-5">{{
+                $t('Save')
+              }}</v-btn>
+              <v-btn color="error" @click="cancelEdit" class="mt-5">{{
+                $t('Cancel')
+              }}</v-btn>
             </v-form>
           </v-card-text>
         </v-card>
@@ -48,6 +53,13 @@ export default {
 
   computed: {
     ...mapState('auth', ['user']),
+  },
+
+  methods: {
+    cancelEdit() {
+      // If nothing changed
+      this.$router.go(-1)
+    },
   },
 
   created() {

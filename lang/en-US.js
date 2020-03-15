@@ -1,6 +1,7 @@
 export default {
   About: 'About',
   All: 'All',
+  Cancel: 'Cancel',
   Current: 'Current',
   Email: 'Email',
   Events: 'Events',
