@@ -1,30 +1,47 @@
 <template>
   <v-container fluid>
+    <v-row no-gutters>
+      <v-col cols="12" class="d-flex justify-center">
+        <v-avatar size="100">
+          <v-img src="https://i.pravatar.cc/100">
+            <template #placeholder>
+              <v-skeleton-loader type="image"></v-skeleton-loader>
+            </template>
+          </v-img>
+        </v-avatar>
+      </v-col>
+    </v-row>
+
+    <v-row no-gutters>
+      <v-col cols="12" class="text-center">
+        <h1>{{ profile.display_name }}</h1>
+      </v-col>
+    </v-row>
+
+    <v-row no-gutters>
+      <v-col cols="12" class="text-center">
+        <p>{{ profile.gender || 'Unknown' }} - 20</p>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col cols="12" class="text-center">
+        <v-btn color="info" nuxt :to="localePath('/profile/edit')">
+          EDIT PROFILE
+        </v-btn>
+      </v-col>
+    </v-row>
+
     <v-row>
       <v-col cols="12" md="6">
         <v-card>
           <v-card-title>
-            {{ profile.display_name }}
-            <v-spacer></v-spacer>
-            <v-card-actions v-if="profileIsMe">
-              <v-btn text nuxt :to="localePath('/profile/edit')">EDIT</v-btn>
-            </v-card-actions>
+            Bio
           </v-card-title>
-          <v-card-subtitle>
-            {{ profile.gender || 'Unknown' }} - 20
-          </v-card-subtitle>
-          <v-container fluid>
-            <v-row>
-              <v-col>
-                <h2>Bio</h2>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col>
-                <p>{{ profile.bio || 'No bio yet' }}</p>
-              </v-col>
-            </v-row>
-          </v-container>
+
+          <v-card-text>
+            {{ profile.bio || 'No bio yet' }}
+          </v-card-text>
         </v-card>
       </v-col>
 
