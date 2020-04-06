@@ -9,14 +9,14 @@ export default {
   async asyncData(context) {
     try {
       await context.$axios.post('/auth/register/verify/', {
-        secret: context.route.query.token,
+        token: context.route.query.token,
       })
 
       context.redirect({ path: '/login', query: { register: 'success' } })
     } catch (e) {
       const { data } = e.response
-
       const message = data.detail ? data.detail : JSON.stringify(data)
+      console.log(message)
 
       context.error({
         statusCode: 400,
