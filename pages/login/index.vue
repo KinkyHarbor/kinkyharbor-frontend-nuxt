@@ -115,7 +115,7 @@ export default {
       try {
         await this.$auth.loginWith('local', {
           data: {
-            username: this.username,
+            login: this.username,
             password: this.password,
           },
         })
