@@ -251,8 +251,8 @@ export default {
           username: this.username,
           email: this.email,
           password: this.password,
-          isAdult: this.adult,
-          acceptPrivacyAndTerms: this.privacyAndTerms,
+          is_adult: this.adult,
+          accept_privacy_and_terms: this.privacyAndTerms,
         })
 
         this.step = 2
