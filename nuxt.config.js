@@ -196,7 +196,7 @@ export default {
                     },
                     refresh: { url: '/auth/refresh', method: 'post' },
                     logout: false,
-                    user: { url: '/users/me/', method: 'get', propertyName: 'user' },
+                    user: { url: '/users/me/', method: 'get', propertyName: false },
                 },
                 autoLogout: true,
             },

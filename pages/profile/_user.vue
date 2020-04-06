@@ -14,17 +14,17 @@
 
     <v-row no-gutters>
       <v-col cols="12" class="text-center">
-        <h1>{{ profile.display_name }}</h1>
+        <h1>{{ profile.user.display_name }}</h1>
       </v-col>
     </v-row>
 
     <v-row no-gutters>
       <v-col cols="12" class="text-center">
-        <p>{{ profile.gender || 'Unknown' }} - 20</p>
+        <p>{{ profile.user.gender || 'Unknown' }} - 20</p>
       </v-col>
     </v-row>
 
-    <v-row>
+    <v-row v-if="profile.is_self">
       <v-col cols="12" class="text-center">
         <v-btn color="info" nuxt :to="localePath('/profile/edit')">
           EDIT PROFILE
@@ -32,7 +32,15 @@
       </v-col>
     </v-row>
 
-    <v-row>
+    <v-row v-if="isStranger">
+      <v-col cols="12" class="text-center">
+        <v-btn color="success" nuxt :to="localePath('/profile/edit')">
+          BECOME FRIENDS
+        </v-btn>
+      </v-col>
+    </v-row>
+
+    <v-row v-if="!isStranger">
       <v-col cols="12" md="6">
         <v-card>
           <v-card-title>
@@ -40,7 +48,7 @@
           </v-card-title>
 
           <v-card-text>
-            {{ profile.bio || 'No bio yet' }}
+            {{ profile.user.bio || 'No bio yet' }}
           </v-card-text>
         </v-card>
       </v-col>
@@ -62,7 +70,10 @@
                     <nuxt-link
                       :to="
                         localePath(
-                          '/profile/' + profile.username + '/photo/' + String(n)
+                          '/profile/' +
+                            profile.user.username +
+                            '/photo/' +
+                            String(n)
                         )
                       "
                     >
@@ -106,7 +117,7 @@
                         nuxt
                         :to="
                           localePath(
-                            '/profile/' + profile.username + '/photos/'
+                            '/profile/' + profile.user.username + '/photos/'
                           )
                         "
                         class="text-center"
@@ -148,7 +159,10 @@
                     <nuxt-link
                       :to="
                         localePath(
-                          '/profile/' + profile.username + '/photo/' + String(n)
+                          '/profile/' +
+                            profile.user.username +
+                            '/photo/' +
+                            String(n)
                         )
                       "
                     >
@@ -199,7 +213,10 @@
                     <nuxt-link
                       :to="
                         localePath(
-                          '/profile/' + profile.username + '/photo/' + String(n)
+                          '/profile/' +
+                            profile.user.username +
+                            '/photo/' +
+                            String(n)
                         )
                       "
                     >
@@ -250,7 +267,7 @@ export default {
     return $axios
       .$get(`/users/${params.user}/`)
       .then((data) => {
-        return { profile: data.user }
+        return { profile: data }
       })
       .catch((e) => {
         error({ statusCode: 404, message: 'Profile not found' })
@@ -258,15 +275,15 @@ export default {
   },
 
   computed: {
-    profileIsMe() {
-      return this.user.username === this.profile.username
+    isStranger() {
+      return !this.profile.is_self && !this.profile.is_friend
     },
 
     title() {
-      if (this.profileIsMe) {
+      if (this.profile.is_self) {
         return 'My profile'
       }
-      return this.profile.display_name
+      return this.profile.user.display_name
     },
 
     ...mapState('auth', ['user']),
