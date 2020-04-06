@@ -120,6 +120,9 @@ export default {
           },
         })
 
+        // Force fetch user
+        await this.$auth.fetchUser()
+
         // Redirect to homepage
         this.$router.replace(this.localePath('/'))
       } catch (e) {
