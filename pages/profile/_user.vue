@@ -24,7 +24,7 @@
       </v-col>
     </v-row>
 
-    <v-row v-if="profile.is_self">
+    <v-row v-if="isSelf">
       <v-col cols="12" class="text-center">
         <v-btn color="info" nuxt :to="localePath('/profile/edit')">
           EDIT PROFILE
@@ -275,12 +275,16 @@ export default {
   },
 
   computed: {
+    isSelf() {
+      return this.profile.relation === 'SELF'
+    },
+
     isStranger() {
-      return !this.profile.is_self && !this.profile.is_friend
+      return this.profile.relation === 'STRANGER'
     },
 
     title() {
-      if (this.profile.is_self) {
+      if (this.isSelf) {
         return 'My profile'
       }
       return this.profile.user.display_name
