@@ -10,12 +10,12 @@
             <v-form @submit.prevent="updateUser">
               <v-combobox
                 v-model="newGender"
-                @update:search-input="updateGender"
                 :items="genders"
                 hide-selected
                 persistent-hint
                 label="Gender"
                 hint="Choose one or feel free to enter whatever you like the most"
+                @update:search-input="updateGender"
               ></v-combobox>
 
               <v-textarea
@@ -28,9 +28,9 @@
               <v-btn color="success" type="submit" class="mt-5">{{
                 $t('Save')
               }}</v-btn>
-              <v-btn color="error" @click="cancelEdit" class="mt-5">{{
-                $t('Cancel')
-              }}</v-btn>
+              <v-btn color="error" class="mt-5" @click="cancelEdit">
+                {{ $t('Cancel') }}
+              </v-btn>
             </v-form>
           </v-card-text>
         </v-card>
@@ -53,6 +53,11 @@ export default {
 
   computed: {
     ...mapState('auth', ['user']),
+  },
+
+  created() {
+    this.newBio = this.user.bio
+    this.newGender = this.user.gender
   },
 
   methods: {
@@ -80,11 +85,6 @@ export default {
       // If nothing changed
       this.$router.go(-1)
     },
-  },
-
-  created() {
-    this.newBio = this.user.bio
-    this.newGender = this.user.gender
   },
 
   head() {
