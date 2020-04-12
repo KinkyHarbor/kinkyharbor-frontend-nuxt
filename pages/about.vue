@@ -62,7 +62,7 @@ export default {
           Good privacy, starts by making sure you can trust the organization which 
           handles your data. We believe trust starts with honesty and transparency.
           Therefore, we created our
-          <a href="/transparency" target="_blank">Transparency page</a>.`,
+          <a href="/transparency">Transparency page</a>.`,
             `
           This page gives a clear overview about our expenses, how we earn money,
           where your data is stored, current user count, &hellip;

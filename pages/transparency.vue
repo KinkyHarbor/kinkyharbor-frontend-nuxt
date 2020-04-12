@@ -5,27 +5,42 @@
         <h1 class="text-center">A friendly crew, nothing to hide!</h1>
         <p class="text-center">
           Good privacy starts with trust. Therefore, we want to be as
-          transparent as possible about our finance and how we handle your data.
+          transparent as possible about our finances and how we handle your
+          data.
         </p>
       </v-col>
     </v-row>
     <v-row>
       <v-col>
         <v-card>
-          <v-card-title class="text-center">
-            Finance
-          </v-card-title>
           <v-card-text>
-            <v-row>
-              <v-col cols="12" sm="6" lg="4" offset-lg="1">
+            <v-row align="center">
+              <v-col cols="12" lg="3">
+                <h2>Finance</h2>
+                <p>
+                  The purpose of Harbor is to build a nice platform for the
+                  community, not to earn money. We aim to keep the platform free
+                  and ad-free. Therefore, we want to show you exactly which
+                  costs we have to deal with and how they are getting paid.
+                </p>
+                <p>
+                  Currently, all costs are covered by personal contributions. To
+                  keep a stable situation, we might introduce paid features in
+                  the future. These features will always be an extension to the
+                  current features. We commit ourselves, to never change an
+                  existing feature to a paid feature.
+                </p>
+              </v-col>
+
+              <v-col cols="12" sm="6" lg="4">
                 <h3>Costs</h3>
                 <div>
                   <canvas ref="chart-costs" class="chart"></canvas>
                 </div>
                 <ul class="mt-3">
                   <li>
-                    <b>Infra:</b> Servers, domain names, &hellip; the geeky
-                    stuff
+                    <b>Infra:</b> Servers, domain names, storage, &hellip; the
+                    geeky stuff
                   </li>
                 </ul>
               </v-col>
@@ -49,14 +64,33 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" sm="6">
+      <v-col cols="12" md="6">
         <v-card>
-          <v-card-title class="text-center">
-            Your data is stored in
-          </v-card-title>
           <v-card-text>
-            <v-row>
-              <v-col>
+            <v-row align="center">
+              <v-col cols="12" sm="6" order-sm="last">
+                <h2>Data locations</h2>
+                <p>
+                  The location of your data is important. This is one of the
+                  factors which determs which laws are applicable to them. As
+                  all our servers are located in Europe, your data is protected
+                  by the
+                  <a
+                    href="https://en.wikipedia.org/wiki/General_Data_Protection_Regulation"
+                    target="_blank"
+                  >
+                    GDPR </a
+                  >.
+                </p>
+                <p>
+                  Privacy is our top priority. Therefore, we only ask for
+                  personal infomation if it's really required. For an in-depth
+                  explanation about which data we process and how we use it,
+                  please check our
+                  <a href="/privacy" target="_blank"> Privacy Policy</a>.
+                </p>
+              </v-col>
+              <v-col cols="12" sm="6">
                 <div>
                   <canvas ref="chart-data-map" class="chart"></canvas>
                 </div>
@@ -123,6 +157,10 @@ export default {
           yAxes: [
             {
               stacked: true,
+              scaleLabel: {
+                display: true,
+                labelString: 'Amount in EURO',
+              },
             },
           ],
         },
