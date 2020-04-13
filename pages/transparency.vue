@@ -72,21 +72,19 @@
                 <h2>Data locations</h2>
                 <p>
                   The location of your data is important. This is one of the
-                  factors which determs which laws are applicable to them. As
+                  factors which determines which laws are applicable to them. As
                   all our servers are located in Europe, your data is protected
                   by the
                   <a
                     href="https://en.wikipedia.org/wiki/General_Data_Protection_Regulation"
                     target="_blank"
                   >
-                    GDPR </a
+                    GDPR</a
                   >.
                 </p>
                 <p>
-                  Privacy is our top priority. Therefore, we only ask for
-                  personal infomation if it's really required. For an in-depth
-                  explanation about which data we process and how we use it,
-                  please check our
+                  For an in-depth explanation about which data we process and
+                  how we use it, please check our
                   <a href="/privacy" target="_blank"> Privacy Policy</a>.
                 </p>
               </v-col>

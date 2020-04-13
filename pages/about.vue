@@ -47,7 +47,7 @@ export default {
           you do at Harbor, belongs to you. Therefore, it should be your decision
           how much you want to share.`,
             `
-          To make this possible, we added finegrained privacy controls. These allow
+          To make this possible, we added fine-grained privacy controls. These allow
           you to choose who can see what. For example, you want to show your age
           to friends, but hide it for strangers? Or share a photo album with only
           a select group of people? No problem!
@@ -89,8 +89,8 @@ export default {
           texts: [
             `
           This platform is built by the community, for the community. You want
-          to know how it works? Just have a look at
-          <a href="https://github.com/KinkyHarbor" target="_blank">our organisation on GitHub</a>.
+          to know how it works? Just have a look at our
+          <a href="https://github.com/KinkyHarbor" target="_blank">organization on GitHub</a>.
           The code of the project is freely available. This way, anybody can check our code
           and even propose improvements and new features.
           `,
