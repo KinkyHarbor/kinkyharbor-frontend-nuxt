@@ -97,6 +97,27 @@
           </v-card-text>
         </v-card>
       </v-col>
+
+      <v-col cols="12" md="6">
+        <v-card>
+          <v-card-text>
+            <v-row align="center">
+              <v-col cols="12" sm="6" order-sm="last">
+                <h2>Active users</h2>
+                <p>
+                  Currently we have <b>68</b> active users. We consider users as
+                  active, if their last login is less than one month ago.
+                </p>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <div>
+                  <canvas ref="chart-active-users" class="chart"></canvas>
+                </div>
+              </v-col>
+            </v-row>
+          </v-card-text>
+        </v-card>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -251,6 +272,64 @@ export default {
       },
     })
     chartDataMap.canvas.parentNode.style.height = '400px'
+
+    const chartActiveUsers = new Chart(this.$refs['chart-active-users'], {
+      type: 'line',
+      data: {
+        labels: [15, 26, 34, 49, 68],
+        datasets: [
+          {
+            label: 'Active users',
+            backgroundColor: '#D32F2FCC',
+            // borderColor: 'red',
+            fill: true,
+            data: [15, 26, 34, 49, 68],
+          },
+        ],
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'Average of active users per month',
+        },
+        maintainAspectRatio: false,
+        tooltips: {
+          mode: 'index',
+          intersect: false,
+        },
+        hover: {
+          mode: 'nearest',
+          intersect: true,
+        },
+        legend: {
+          display: false,
+        },
+        scales: {
+          xAxes: [
+            {
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: 'Month',
+              },
+            },
+          ],
+          yAxes: [
+            {
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: 'Value',
+              },
+              ticks: {
+                beginAtZero: true,
+              },
+            },
+          ],
+        },
+      },
+    })
+    chartActiveUsers.canvas.parentNode.style.height = '400px'
   },
 
   methods: {
