@@ -190,13 +190,13 @@ export default {
       data: this.convertToChartData(costs, '#D32F2FCC'),
       ...chartSettings,
     })
-    chartCosts.canvas.parentNode.style.height = '400px'
+    chartCosts.canvas.parentNode.style.height = '350px'
 
     const chartIncomes = new Chart(this.$refs['chart-incomes'], {
       data: this.convertToChartData(incomes, '#8BC34ACC'),
       ...chartSettings,
     })
-    chartIncomes.canvas.parentNode.style.height = '400px'
+    chartIncomes.canvas.parentNode.style.height = '350px'
 
     // Geo Map
     const features = topojson.feature(
@@ -271,7 +271,7 @@ export default {
         },
       },
     })
-    chartDataMap.canvas.parentNode.style.height = '400px'
+    chartDataMap.canvas.parentNode.style.height = '350px'
 
     const chartActiveUsers = new Chart(this.$refs['chart-active-users'], {
       type: 'line',
@@ -329,7 +329,7 @@ export default {
         },
       },
     })
-    chartActiveUsers.canvas.parentNode.style.height = '400px'
+    chartActiveUsers.canvas.parentNode.style.height = '350px'
   },
 
   methods: {
