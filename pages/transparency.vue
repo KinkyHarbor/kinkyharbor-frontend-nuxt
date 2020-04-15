@@ -105,8 +105,9 @@
               <v-col cols="12" sm="6" order-sm="last">
                 <h2>Active users</h2>
                 <p>
-                  Currently we have <b>68</b> active users. We consider users as
-                  active, if their last login is less than one month ago.
+                  Currently we have <b>{{ activeUsers.now }}</b> active users.
+                  We consider users as active, if their last login is less than
+                  one month ago.
                 </p>
               </v-col>
               <v-col cols="12" sm="6">
@@ -132,6 +133,12 @@ const Color = require('color')
 
 export default {
   auth: false,
+
+  asyncData({ $axios, error }) {
+    return $axios.$get('/stats/active-users/').then((data) => {
+      return { activeUsers: data }
+    })
+  },
 
   mounted() {
     const costs = [
@@ -273,17 +280,25 @@ export default {
     })
     chartDataMap.canvas.parentNode.style.height = '350px'
 
+    const activeUsersEntries = Object.entries(
+      this.activeUsers.history
+    ).sort((a, b) => a[0].localeCompare(b[0]))
+
     const chartActiveUsers = new Chart(this.$refs['chart-active-users'], {
       type: 'line',
       data: {
-        labels: [15, 26, 34, 49, 68],
+        labels: activeUsersEntries.map((entry) => {
+          // Entry index 0 = key
+          const parts = entry[0].split('-')
+          return parts[1] + '.' + parts[0]
+        }),
         datasets: [
           {
             label: 'Active users',
             backgroundColor: '#D32F2FCC',
-            // borderColor: 'red',
             fill: true,
-            data: [15, 26, 34, 49, 68],
+            // Entry index 1 = value
+            data: activeUsersEntries.map((entry) => entry[1]),
           },
         ],
       },
@@ -318,11 +333,11 @@ export default {
             {
               display: true,
               scaleLabel: {
-                display: true,
-                labelString: 'Value',
+                display: false,
               },
               ticks: {
                 beginAtZero: true,
+                precision: 0,
               },
             },
           ],
