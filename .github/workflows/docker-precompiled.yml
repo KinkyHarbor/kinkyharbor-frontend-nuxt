@@ -1,0 +1,39 @@
+name: Build precompiled Docker images
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build & Push to Docker Hub
+        uses: opspresso/action-docker@master
+        with:
+          args: --docker
+        env:
+          DOCKER_BUILD_ARGS: --build-arg API_URL=https://test-api.kinkyharbor.com --build-arg KH_BASE=https://test.kinkyharbor.com
+          USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          IMAGE_NAME: 'kinkyharbor/kinkyharbor-frontend-nuxt'
+          TAG_NAME: 'precompiled-test'
+          LATEST: 'false'
+
+  build-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build & Push to Docker Hub
+        uses: opspresso/action-docker@master
+        with:
+          args: --docker
+        env:
+          DOCKER_BUILD_ARGS: --build-arg API_URL=https://test-demo.kinkyharbor.com --build-arg KH_BASE=https://demo.kinkyharbor.com
+          USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          IMAGE_NAME: 'kinkyharbor/kinkyharbor-frontend-nuxt'
+          TAG_NAME: 'precompiled-demo'
+          LATEST: 'false'
