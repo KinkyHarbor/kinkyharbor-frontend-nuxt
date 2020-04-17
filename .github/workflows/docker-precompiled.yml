@@ -32,7 +32,7 @@ jobs:
         with:
           args: --docker
         env:
-          DOCKER_BUILD_ARGS: --build-arg API_URL=https://test-demo.kinkyharbor.com --build-arg KH_BASE=https://demo.kinkyharbor.com
+          DOCKER_BUILD_ARGS: --build-arg API_URL=https://demo-api.kinkyharbor.com --build-arg KH_BASE=https://demo.kinkyharbor.com
           USERNAME: ${{ secrets.DOCKER_USERNAME }}
           PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           DOCKERFILE: 'precompiled.dockerfile'
