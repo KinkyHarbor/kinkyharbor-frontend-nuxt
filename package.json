@@ -22,7 +22,8 @@
         "chartjs-chart-geo": "^1.1.4",
         "color": "^3.1.2",
         "nuxt": "^2.0.0",
-        "nuxt-i18n": "^6.6.0"
+        "nuxt-i18n": "^6.6.0",
+        "vue-chartjs": "^3.5.0"
     },
     "devDependencies": {
         "@nuxtjs/eslint-config": "^2.0.0",
