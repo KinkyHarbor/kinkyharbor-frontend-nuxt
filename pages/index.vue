@@ -1,17 +1,25 @@
 <template>
-  <v-layout column justify-center align-center>
-    <v-flex xs12 sm8 md6>
-      <div class="text-center">
-        <v-icon size="100px">mdi-anchor</v-icon>
-      </div>
-      <v-card>
-        <v-card-title class="headline">Welcome to Harbor</v-card-title>
-        <v-card-text>
-          <p>Your socially safe heaven &hellip;</p>
-        </v-card-text>
-      </v-card>
-    </v-flex>
-  </v-layout>
+  <v-container id="home-container" fluid fill-height>
+    <v-row justify="center" align="start">
+      <v-col cols="12" sm="8" md="6" class="text-center">
+        <v-icon size="200px">mdi-anchor</v-icon>
+        <h1 class="pb-5">Welcome to Harbor!</h1>
+        <p class="mb-0">
+          Feel free to roam around in our
+          <nuxt-link :to="localePath('/about')">about</nuxt-link>
+          and
+          <nuxt-link :to="localePath('/transparency')">transparency</nuxt-link>
+          page.
+        </p>
+        <p>
+          Or jump right in and
+          <nuxt-link :to="localePath('/register')">
+            create your account</nuxt-link
+          >!
+        </p>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -27,3 +35,11 @@ export default {
   },
 }
 </script>
+
+<style>
+#home-container {
+  background-image: url('~assets/harbor.jpg');
+  background-size: cover;
+  background-position: center bottom;
+}
+</style>

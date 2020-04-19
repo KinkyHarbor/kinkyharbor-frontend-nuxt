@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col cols="12" sm="10" offset-sm="1" md="8" offset-md="2">
-        <h1 class="text-center">Welcome to the pirate side!</h1>
+        <h1 class="text-center">A brief intro to Harbor</h1>
         <p class="text-center">
           Platforms like
           <a href="https://fetlife.com" target="_blank">FetLife</a>
