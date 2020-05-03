@@ -97,12 +97,12 @@
         <v-btn text large>{{ $t('Register') }}</v-btn>
       </nuxt-link>
 
-      <v-btn v-if="loggedIn" icon nuxt :to="localePath('/profile/me')">
-        <v-icon :large="$vuetify.breakpoint.xsOnly">mdi-account-circle</v-icon>
-      </v-btn>
-
       <v-btn v-if="loggedIn" icon @click="searchMode = !searchMode">
         <v-icon :large="$vuetify.breakpoint.xsOnly">mdi-magnify</v-icon>
+      </v-btn>
+
+      <v-btn v-if="loggedIn" icon nuxt :to="localePath('/profile/me')">
+        <v-icon :large="$vuetify.breakpoint.xsOnly">mdi-account-circle</v-icon>
       </v-btn>
 
       <v-menu v-if="loggedIn" :transition="false">
@@ -136,17 +136,25 @@
       <v-spacer class="hidden-xs-only" />
       <v-text-field
         v-model="searchQuery"
+        placeholder="Press Enter to search, ESC to quit"
         hide-details
-        prepend-icon="mdi-close"
-        append-outer-icon="mdi-magnify"
         single-line
         autofocus
-        @click:prepend.stop="closeSearchMode"
-        @click:append-outer="openSearchPage"
         @keydown.esc="closeSearchMode"
         @keydown.enter="openSearchPage"
       ></v-text-field>
+      <v-btn icon @click="openSearchPage" :disabled="searchQuery.length === 0">
+        <v-icon :large="$vuetify.breakpoint.xsOnly">mdi-magnify</v-icon>
+      </v-btn>
       <v-spacer class="hidden-xs-only" />
+
+      <v-btn icon @click="closeSearchMode" v-if="$vuetify.breakpoint.xsOnly">
+        <v-icon large>mdi-close</v-icon>
+      </v-btn>
+
+      <v-btn text @click="closeSearchMode" v-if="$vuetify.breakpoint.smAndUp">
+        Exit search
+      </v-btn>
     </v-app-bar>
 
     <v-content>
@@ -232,13 +240,15 @@ export default {
   methods: {
     openSearchPage() {
       const searchQuery = this.searchQuery
-      this.closeSearchMode()
-      this.$router.push(
-        this.localePath({
-          path: '/search',
-          query: { q: searchQuery },
-        })
-      )
+      if (searchQuery.length > 0) {
+        this.closeSearchMode()
+        this.$router.push(
+          this.localePath({
+            path: '/search',
+            query: { q: searchQuery },
+          })
+        )
+      }
     },
 
     closeSearchMode() {
