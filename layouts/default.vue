@@ -101,6 +101,10 @@
         <v-icon :large="$vuetify.breakpoint.xsOnly">mdi-magnify</v-icon>
       </v-btn>
 
+      <v-btn v-if="loggedIn" icon nuxt :to="localePath('/notifications')">
+        <v-icon :large="$vuetify.breakpoint.xsOnly">mdi-bell-outline</v-icon>
+      </v-btn>
+
       <v-btn v-if="loggedIn" icon nuxt :to="localePath('/profile/me')">
         <v-icon :large="$vuetify.breakpoint.xsOnly">mdi-account-circle</v-icon>
       </v-btn>

@@ -1,7 +1,7 @@
 <template>
   <v-layout>
     <v-flex class="text-center">
-      <h1>{{ this.$t('Groups') }}</h1>
+      <h1>{{ $t('Groups') }}</h1>
     </v-flex>
   </v-layout>
 </template>
